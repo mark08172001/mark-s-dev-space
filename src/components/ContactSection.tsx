@@ -26,7 +26,7 @@ const ContactSection = () => {
               <h3 className="font-semibold mb-2">Email</h3>
               <a
                 href="mailto:permisonmark17@gmail.com"
-                className="text-muted-foreground hover:text-primary transition-colors text-xs break-all"
+                className="text-muted-foreground hover:text-primary transition-colors text-sm break-all pr-2"
               >
                 permisonmark17@gmail.com
               </a>
