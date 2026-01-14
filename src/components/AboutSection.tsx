@@ -9,59 +9,58 @@ const stats = [
 
 const AboutSection = () => {
   return (
-    <section id="about" className="py-20 md:py-32 relative">
+    <section id="about" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
+            <span className="text-xs font-medium text-primary tracking-widest uppercase mb-3 block">
               About Me
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Passionate Developer &{' '}
-              <span className="gradient-text">Problem Solver</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 tracking-tight">
+              Passionate Developer & Problem Solver
             </h2>
+            <div className="section-divider mt-6" />
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+          <div className="grid lg:grid-cols-2 gap-16 items-start">
             {/* About Content */}
-            <div className="space-y-6">
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                I am a <span className="text-foreground font-medium">BS Information Technology</span> graduate and an Entry-Level Full Stack / Business Application Developer with hands-on experience in software development and quality assurance.
+            <div className="space-y-5">
+              <p className="text-muted-foreground leading-relaxed">
+                I am a <span className="text-foreground">BS Information Technology</span> graduate and an Entry-Level Full Stack / Business Application Developer with hands-on experience in software development and quality assurance.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                During my time at <span className="text-primary font-medium">Forecasting and Planning Technologies, Inc.</span>, I worked as both a Business Application Developer (Contractual) and On-the-Job Trainee in QA/QC, where I gained valuable experience in developing and testing real-world business applications.
+              <p className="text-muted-foreground leading-relaxed">
+                During my time at <span className="text-primary">Forecasting and Planning Technologies, Inc.</span>, I worked as both a Business Application Developer (Contractual) and On-the-Job Trainee in QA/QC, where I gained valuable experience in developing and testing real-world business applications.
               </p>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                I specialize in <span className="text-foreground font-medium">web development, system development, quality assurance, and technical support</span>. I am detail-oriented, adaptable, and passionate about creating elegant solutions to complex problems.
+              <p className="text-muted-foreground leading-relaxed">
+                I specialize in <span className="text-foreground">web development, system development, quality assurance, and technical support</span>. I am detail-oriented, adaptable, and passionate about creating elegant solutions to complex problems.
               </p>
 
               {/* Quick Info */}
-              <div className="grid grid-cols-2 gap-4 pt-4">
-                <div className="glass-card p-4">
-                  <span className="text-muted-foreground text-sm">Location</span>
-                  <p className="text-foreground font-medium">Philippines</p>
+              <div className="grid grid-cols-2 gap-3 pt-6">
+                <div className="p-4 border border-border/60 rounded-md">
+                  <span className="text-muted-foreground text-xs tracking-wide uppercase">Location</span>
+                  <p className="text-foreground text-sm mt-1">Philippines</p>
                 </div>
-                <div className="glass-card p-4">
-                  <span className="text-muted-foreground text-sm">Email</span>
-                  <p className="text-foreground font-medium text-sm">permisonmark17@gmail.com</p>
+                <div className="p-4 border border-border/60 rounded-md">
+                  <span className="text-muted-foreground text-xs tracking-wide uppercase">Email</span>
+                  <p className="text-foreground text-sm mt-1 break-all">permisonmark17@gmail.com</p>
                 </div>
               </div>
             </div>
 
             {/* Stats Grid */}
             <div className="grid grid-cols-2 gap-4">
-              {stats.map((stat, index) => (
+              {stats.map((stat) => (
                 <div
                   key={stat.label}
-                  className="glass-card p-6 text-center hover-lift"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                  className="p-6 border border-border/60 rounded-md text-center hover-lift"
                 >
-                  <div className="w-14 h-14 mx-auto mb-4 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
-                    <stat.icon className="w-7 h-7 text-primary" />
+                  <div className="w-10 h-10 mx-auto mb-4 rounded-md bg-primary/5 border border-primary/10 flex items-center justify-center">
+                    <stat.icon className="w-5 h-5 text-primary" />
                   </div>
-                  <div className="text-3xl font-bold gradient-text mb-1">{stat.value}</div>
-                  <div className="text-sm text-muted-foreground">{stat.label}</div>
+                  <div className="text-2xl font-semibold text-primary mb-1">{stat.value}</div>
+                  <div className="text-xs text-muted-foreground tracking-wide">{stat.label}</div>
                 </div>
               ))}
             </div>

@@ -30,42 +30,42 @@ const skillCategories = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-20 md:py-32 relative">
+    <section id="skills" className="py-24 md:py-32 relative">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="max-w-6xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           {/* Section Header */}
           <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
+            <span className="text-xs font-medium text-primary tracking-widest uppercase mb-3 block">
               Skills
             </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Technical <span className="gradient-text">Expertise</span>
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-semibold mb-4 tracking-tight">
+              Technical Expertise
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
+            <p className="text-muted-foreground max-w-lg mx-auto">
               A comprehensive toolkit for building and maintaining quality software
             </p>
+            <div className="section-divider mt-6" />
           </div>
 
           {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {skillCategories.map((category, index) => (
+          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {skillCategories.map((category) => (
               <div
                 key={category.title}
-                className="glass-card p-6 hover-lift"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                className="p-5 border border-border/60 rounded-md hover-lift"
               >
-                <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
-                    <category.icon className="w-6 h-6 text-primary" />
+                <div className="flex items-center gap-3 mb-5">
+                  <div className="w-9 h-9 rounded-md bg-primary/5 border border-primary/10 flex items-center justify-center">
+                    <category.icon className="w-4 h-4 text-primary" />
                   </div>
-                  <h3 className="text-lg font-semibold">{category.title}</h3>
+                  <h3 className="text-sm font-medium">{category.title}</h3>
                 </div>
 
-                <div className="flex flex-wrap gap-2">
+                <div className="flex flex-wrap gap-1.5">
                   {category.skills.map((skill) => (
                     <span
                       key={skill}
-                      className="px-3 py-1.5 text-sm bg-primary/10 border border-primary/20 rounded-lg text-muted-foreground"
+                      className="px-2.5 py-1 text-xs bg-muted/50 rounded-md text-muted-foreground"
                     >
                       {skill}
                     </span>
