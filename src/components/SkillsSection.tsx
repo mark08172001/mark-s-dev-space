@@ -1,4 +1,5 @@
 import { Code, Database, Shield, Monitor, Wrench } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
@@ -28,13 +29,39 @@ const skillCategories = [
   },
 ];
 
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.1,
+    },
+  },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 40, scale: 0.95 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.5, ease: [0.25, 0.46, 0.45, 0.94] as const },
+  },
+};
+
 const SkillsSection = () => {
   return (
     <section id="skills" className="py-20 md:py-32 relative">
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
               Skills
             </span>
@@ -44,36 +71,59 @@ const SkillsSection = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               A comprehensive toolkit for building and maintaining quality software
             </p>
-          </div>
+          </motion.div>
 
           {/* Skills Grid */}
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            variants={containerVariants}
+            className="grid md:grid-cols-2 lg:grid-cols-3 gap-6"
+          >
             {skillCategories.map((category, index) => (
-              <div
+              <motion.div
                 key={category.title}
-                className="glass-card p-6 hover-lift"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                variants={cardVariants}
+                className="glass-card p-6"
+                whileHover={{ 
+                  y: -8,
+                  boxShadow: '0 15px 40px hsl(var(--primary) / 0.12)'
+                }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
                 <div className="flex items-center gap-3 mb-6">
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center">
+                  <motion.div
+                    className="w-12 h-12 rounded-xl bg-primary/10 border border-primary/30 flex items-center justify-center"
+                    whileHover={{ rotate: 10, scale: 1.1 }}
+                    transition={{ type: 'spring', stiffness: 400 }}
+                  >
                     <category.icon className="w-6 h-6 text-primary" />
-                  </div>
+                  </motion.div>
                   <h3 className="text-lg font-semibold">{category.title}</h3>
                 </div>
 
                 <div className="flex flex-wrap gap-2">
-                  {category.skills.map((skill) => (
-                    <span
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.span
                       key={skill}
-                      className="px-3 py-1.5 text-sm bg-primary/10 border border-primary/20 rounded-lg text-muted-foreground"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: 0.1 * skillIndex }}
+                      whileHover={{ 
+                        scale: 1.08,
+                        backgroundColor: 'hsl(var(--primary) / 0.2)'
+                      }}
+                      className="px-3 py-1.5 text-sm bg-primary/10 border border-primary/20 rounded-lg text-muted-foreground cursor-default"
                     >
                       {skill}
-                    </span>
+                    </motion.span>
                   ))}
                 </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>
