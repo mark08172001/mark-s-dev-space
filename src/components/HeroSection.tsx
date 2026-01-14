@@ -63,7 +63,7 @@ const HeroSection = () => {
                   <Mail className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/mark08172001"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all hover-lift"
@@ -71,7 +71,7 @@ const HeroSection = () => {
                   <Github className="w-5 h-5" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/mark-tj-permison-130341316/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="w-11 h-11 rounded-lg bg-card border border-border flex items-center justify-center text-muted-foreground hover:text-primary hover:border-primary/50 transition-all hover-lift"
