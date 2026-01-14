@@ -4,53 +4,27 @@ const skillCategories = [
   {
     icon: Code,
     title: 'Programming & Web',
-    skills: [
-      { name: 'HTML', level: 90 },
-      { name: 'CSS', level: 85 },
-      { name: 'JavaScript', level: 80 },
-      { name: 'C#', level: 75 },
-      { name: 'SQL', level: 80 },
-    ],
+    skills: ['HTML', 'CSS', 'JavaScript', 'C#', 'SQL'],
   },
   {
     icon: Database,
     title: 'Development',
-    skills: [
-      { name: 'Full Stack Development', level: 75 },
-      { name: 'Business Applications', level: 80 },
-      { name: 'System Integration', level: 70 },
-      { name: 'Database Design', level: 75 },
-    ],
+    skills: ['Full Stack Development', 'Business Applications', 'System Integration', 'Database Design'],
   },
   {
     icon: Shield,
     title: 'Quality Assurance',
-    skills: [
-      { name: 'QA/QC Testing', level: 85 },
-      { name: 'Software Testing', level: 80 },
-      { name: 'Documentation', level: 85 },
-      { name: 'Bug Reporting', level: 80 },
-    ],
+    skills: ['QA/QC Testing', 'Software Testing', 'Documentation', 'Bug Reporting'],
   },
   {
     icon: Monitor,
     title: 'Tools & Platforms',
-    skills: [
-      { name: 'Microsoft Word', level: 90 },
-      { name: 'Microsoft Excel', level: 85 },
-      { name: 'Microsoft PowerPoint', level: 85 },
-      { name: 'Visual Studio', level: 75 },
-    ],
+    skills: ['Microsoft Word', 'Microsoft Excel', 'Microsoft PowerPoint', 'Visual Studio'],
   },
   {
     icon: Wrench,
     title: 'Technical Skills',
-    skills: [
-      { name: 'PC Building', level: 85 },
-      { name: 'OS Installation', level: 90 },
-      { name: 'Troubleshooting', level: 85 },
-      { name: 'Networking', level: 75 },
-    ],
+    skills: ['PC Building', 'OS Installation', 'Troubleshooting', 'Networking'],
   },
 ];
 
@@ -87,20 +61,14 @@ const SkillsSection = () => {
                   <h3 className="text-lg font-semibold">{category.title}</h3>
                 </div>
 
-                <div className="space-y-4">
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill) => (
-                    <div key={skill.name}>
-                      <div className="flex justify-between mb-2">
-                        <span className="text-sm text-muted-foreground">{skill.name}</span>
-                        <span className="text-sm text-primary font-medium">{skill.level}%</span>
-                      </div>
-                      <div className="skill-bar">
-                        <div
-                          className="skill-bar-fill transition-all duration-1000 ease-out"
-                          style={{ width: `${skill.level}%` }}
-                        />
-                      </div>
-                    </div>
+                    <span
+                      key={skill}
+                      className="px-3 py-1.5 text-sm bg-primary/10 border border-primary/20 rounded-lg text-muted-foreground"
+                    >
+                      {skill}
+                    </span>
                   ))}
                 </div>
               </div>
