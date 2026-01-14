@@ -1,4 +1,5 @@
 import { Building2, Calendar, CheckCircle2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const experiences = [
   {
@@ -33,7 +34,13 @@ const ExperienceSection = () => {
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-4xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="text-center mb-16"
+          >
             <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
               Experience
             </span>
@@ -43,31 +50,61 @@ const ExperienceSection = () => {
             <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
               Building real-world business applications and ensuring software quality
             </p>
-          </div>
+          </motion.div>
 
           {/* Timeline */}
           <div className="relative">
             {/* Vertical Line */}
-            <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-px bg-border md:-translate-x-1/2" />
+            <motion.div
+              initial={{ height: 0 }}
+              whileInView={{ height: '100%' }}
+              viewport={{ once: true }}
+              transition={{ duration: 1, ease: 'easeOut' }}
+              className="absolute left-0 md:left-1/2 top-0 w-px bg-border md:-translate-x-1/2"
+            />
 
             <div className="space-y-12">
               {experiences.map((exp, index) => (
-                <div
+                <motion.div
                   key={index}
+                  initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: '-50px' }}
+                  transition={{ duration: 0.6, delay: index * 0.2 }}
                   className={`relative flex flex-col md:flex-row gap-8 ${
                     index % 2 === 0 ? 'md:flex-row-reverse' : ''
                   }`}
                 >
                   {/* Timeline Dot */}
-                  <div className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background md:-translate-x-1/2 z-10" />
+                  <motion.div
+                    initial={{ scale: 0 }}
+                    whileInView={{ scale: 1 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + index * 0.2, type: 'spring' }}
+                    className="absolute left-0 md:left-1/2 w-4 h-4 rounded-full bg-primary border-4 border-background md:-translate-x-1/2 z-10"
+                  />
 
                   {/* Content */}
                   <div className={`ml-8 md:ml-0 md:w-1/2 ${index % 2 === 0 ? 'md:pr-12' : 'md:pl-12'}`}>
-                    <div className="glass-card p-6 hover-lift">
+                    <motion.div
+                      className="glass-card p-6"
+                      whileHover={{ 
+                        y: -5,
+                        boxShadow: '0 15px 40px hsl(var(--primary) / 0.12)'
+                      }}
+                      transition={{ type: 'spring', stiffness: 300 }}
+                    >
                       <div className="flex items-center gap-2 text-primary mb-2">
                         <Calendar className="w-4 h-4" />
                         <span className="text-sm font-medium">{exp.period}</span>
-                        <span className="px-2 py-0.5 rounded-full bg-primary/10 text-xs">{exp.type}</span>
+                        <motion.span
+                          initial={{ opacity: 0, scale: 0.8 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          className="px-2 py-0.5 rounded-full bg-primary/10 text-xs"
+                        >
+                          {exp.type}
+                        </motion.span>
                       </div>
 
                       <h3 className="text-xl font-bold mb-2">{exp.title}</h3>
@@ -79,15 +116,22 @@ const ExperienceSection = () => {
 
                       <ul className="space-y-2">
                         {exp.responsibilities.map((item, i) => (
-                          <li key={i} className="flex items-start gap-2 text-muted-foreground text-sm">
+                          <motion.li
+                            key={i}
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: 0.1 * i }}
+                            className="flex items-start gap-2 text-muted-foreground text-sm"
+                          >
                             <CheckCircle2 className="w-4 h-4 text-primary mt-0.5 flex-shrink-0" />
                             <span>{item}</span>
-                          </li>
+                          </motion.li>
                         ))}
                       </ul>
-                    </div>
+                    </motion.div>
                   </div>
-                </div>
+                </motion.div>
               ))}
             </div>
           </div>
