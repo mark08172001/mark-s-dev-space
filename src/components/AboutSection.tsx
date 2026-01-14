@@ -2,7 +2,7 @@ import { Code2, Briefcase, GraduationCap, Award } from 'lucide-react';
 
 const stats = [
   { icon: Briefcase, value: '9+', label: 'Months Experience' },
-  { icon: Code2, value: '2+', label: 'Projects Completed' },
+  { icon: Code2, value: '2+', label: 'Personal Projects' },
   { icon: GraduationCap, value: 'BSIT', label: 'Degree Achieved' },
   { icon: Award, value: '5+', label: 'Certifications' },
 ];
