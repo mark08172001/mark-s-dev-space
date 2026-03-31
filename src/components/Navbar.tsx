@@ -1,96 +1,127 @@
 import { useState, useEffect } from 'react';
-import { Menu, X, Terminal } from 'lucide-react';
+import { Menu, X, FileCode, ChevronRight } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const navLinks = [
-  { name: 'About', href: '#about' },
-  { name: 'Experience', href: '#experience' },
-  { name: 'Skills', href: '#skills' },
-  { name: 'Projects', href: '#projects' },
-  { name: 'Education', href: '#education' },
-  { name: 'Certifications', href: '#certifications' },
-  { name: 'Contact', href: '#contact' },
+  { name: 'about.tsx', href: '#about', icon: '📄' },
+  { name: 'experience.tsx', href: '#experience', icon: '📄' },
+  { name: 'skills.tsx', href: '#skills', icon: '📄' },
+  { name: 'projects.tsx', href: '#projects', icon: '📄' },
+  { name: 'education.tsx', href: '#education', icon: '📄' },
+  { name: 'certifications.tsx', href: '#certifications', icon: '📄' },
+  { name: 'contact.tsx', href: '#contact', icon: '📄' },
 ];
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeTab, setActiveTab] = useState('');
 
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 50);
+      
+      // Detect active section
+      const sections = navLinks.map(l => l.href.replace('#', ''));
+      for (const section of sections.reverse()) {
+        const el = document.getElementById(section);
+        if (el && window.scrollY >= el.offsetTop - 200) {
+          setActiveTab(section);
+          break;
+        }
+      }
     };
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   return (
-    <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-        scrolled ? 'bg-background/80 backdrop-blur-xl border-b border-border/50' : 'bg-transparent'
-      }`}
-    >
-      <div className="container mx-auto px-4 md:px-6">
-        <div className="flex items-center justify-between h-16 md:h-20">
-          <a href="#" className="flex items-center gap-2 group">
-            <div className="w-10 h-10 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
-              <Terminal className="w-5 h-5 text-primary" />
-            </div>
-            <span className="font-mono font-semibold text-lg hidden sm:block">
-              <span className="text-primary">&lt;</span>
-              Mark
-              <span className="text-primary">/&gt;</span>
-            </span>
-          </a>
+    <nav className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+      {/* Title Bar */}
+      <div className="h-8 flex items-center px-4 text-xs font-mono"
+        style={{ background: 'hsl(var(--vscode-titlebar))' }}
+      >
+        <div className="flex items-center gap-2">
+          <div className="flex gap-1.5">
+            <span className="w-3 h-3 rounded-full bg-destructive/80" />
+            <span className="w-3 h-3 rounded-full" style={{ background: 'hsl(var(--syntax-function))' }} />
+            <span className="w-3 h-3 rounded-full" style={{ background: 'hsl(var(--syntax-string))' }} />
+          </div>
+          <span className="text-muted-foreground ml-2 hidden sm:inline">
+            Mark Permison — portfolio — Visual Studio Code
+          </span>
+        </div>
+      </div>
 
-          {/* Desktop Navigation */}
-          <div className="hidden lg:flex items-center gap-8">
+      {/* Tab Bar */}
+      <div className={`flex items-center overflow-x-auto transition-all border-b border-border ${scrolled ? 'shadow-lg' : ''}`}
+        style={{ background: 'hsl(var(--vscode-tab-inactive))' }}
+      >
+        {/* Explorer icon */}
+        <a href="#" className="px-3 py-2 flex items-center gap-1.5 shrink-0 border-r border-border" 
+          style={{ background: 'hsl(var(--vscode-tab-active))' }}
+        >
+          <FileCode className="w-4 h-4 text-primary" />
+          <span className="font-mono text-xs text-foreground hidden sm:inline">index.tsx</span>
+        </a>
+        
+        {/* Desktop Tabs */}
+        <div className="hidden lg:flex items-center">
+          {navLinks.map((link) => (
+            <a
+              key={link.name}
+              href={link.href}
+              className={`vscode-tab flex items-center gap-1.5 shrink-0 ${
+                activeTab === link.href.replace('#', '') ? 'active' : ''
+              }`}
+            >
+              <span className="text-xs">{link.icon}</span>
+              <span>{link.name}</span>
+            </a>
+          ))}
+        </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="lg:hidden ml-auto p-2 text-muted-foreground hover:text-foreground transition-colors"
+        >
+          {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+        </button>
+      </div>
+
+      {/* Breadcrumb */}
+      <motion.div
+        initial={false}
+        animate={{ opacity: scrolled ? 1 : 0, height: scrolled ? 24 : 0 }}
+        className="breadcrumb px-4 flex items-center gap-1 overflow-hidden border-b border-border"
+        style={{ background: 'hsl(var(--vscode-editor))' }}
+      >
+        <span>src</span>
+        <ChevronRight className="w-3 h-3" />
+        <span>portfolio</span>
+        <ChevronRight className="w-3 h-3" />
+        <span className="text-foreground">{activeTab || 'index'}.tsx</span>
+      </motion.div>
+
+      {/* Mobile Navigation */}
+      {isOpen && (
+        <div className="lg:hidden border-b border-border" style={{ background: 'hsl(var(--vscode-sidebar))' }}>
+          <div className="flex flex-col py-1">
             {navLinks.map((link) => (
-              <a key={link.name} href={link.href} className="nav-link text-sm font-medium">
+              <a
+                key={link.name}
+                href={link.href}
+                onClick={() => setIsOpen(false)}
+                className="px-4 py-2 text-sm font-mono text-muted-foreground hover:text-foreground hover:bg-muted/50 flex items-center gap-2 transition-colors"
+              >
+                <span>{link.icon}</span>
                 {link.name}
               </a>
             ))}
-            <a
-              href="#contact"
-              className="px-5 py-2.5 bg-primary text-primary-foreground rounded-lg font-medium text-sm glow-button hover:bg-primary/90"
-            >
-              Hire Me
-            </a>
           </div>
-
-          {/* Mobile Menu Button */}
-          <button
-            onClick={() => setIsOpen(!isOpen)}
-            className="lg:hidden p-2 text-foreground hover:text-primary transition-colors"
-          >
-            {isOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
         </div>
-
-        {/* Mobile Navigation */}
-        {isOpen && (
-          <div className="lg:hidden py-4 border-t border-border/50 animate-fade-in-up">
-            <div className="flex flex-col gap-2">
-              {navLinks.map((link) => (
-                <a
-                  key={link.name}
-                  href={link.href}
-                  onClick={() => setIsOpen(false)}
-                  className="px-4 py-3 text-muted-foreground hover:text-foreground hover:bg-muted/50 rounded-lg transition-colors"
-                >
-                  {link.name}
-                </a>
-              ))}
-              <a
-                href="#contact"
-                onClick={() => setIsOpen(false)}
-                className="mx-4 mt-2 px-5 py-3 bg-primary text-primary-foreground rounded-lg font-medium text-center"
-              >
-                Hire Me
-              </a>
-            </div>
-          </div>
-        )}
-      </div>
+      )}
     </nav>
   );
 };

@@ -8,7 +8,6 @@ const projects = [
     link: 'https://cordillera-harvest-hub.vercel.app/',
     icon: Leaf,
     tags: ['Web Development', 'Agriculture', 'Modern UI'],
-    gradient: 'from-emerald-500/20 to-teal-500/20',
   },
   {
     title: 'Soil Fertility Website',
@@ -16,32 +15,22 @@ const projects = [
     link: 'https://soilfertility.vercel.app/',
     icon: Globe,
     tags: ['Frontend', 'Information System', 'Clean Design'],
-    gradient: 'from-amber-500/20 to-orange-500/20',
   },
 ];
 
 const containerVariants = {
   hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
+  visible: { opacity: 1, transition: { staggerChildren: 0.2 } },
 };
 
 const projectVariants = {
   hidden: { opacity: 0, y: 50 },
-  visible: {
-    opacity: 1,
-    y: 0,
-    transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const },
-  },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.25, 0.46, 0.45, 0.94] as const } },
 };
 
 const ProjectsSection = () => {
   return (
-    <section id="projects" className="py-20 md:py-32 relative bg-secondary/30">
+    <section id="projects" className="py-20 md:py-32 relative" style={{ background: 'hsl(var(--vscode-sidebar))' }}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
@@ -50,17 +39,17 @@ const ProjectsSection = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: '-100px' }}
             transition={{ duration: 0.6 }}
-            className="text-center mb-16"
+            className="mb-16"
           >
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
-              Projects
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Featured <span className="gradient-text">Projects</span>
+            <div className="font-mono text-sm mb-2">
+              <span className="syntax-comment">{'// section: projects'}</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              <span className="syntax-keyword">const</span>{' '}
+              <span className="syntax-variable">projects</span>{' '}
+              <span className="syntax-operator">=</span>{' '}
+              <span className="text-foreground">[</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Real-world applications showcasing my development skills
-            </p>
           </motion.div>
 
           {/* Projects Grid */}
@@ -69,59 +58,52 @@ const ProjectsSection = () => {
             whileInView="visible"
             viewport={{ once: true, margin: '-50px' }}
             variants={containerVariants}
-            className="grid md:grid-cols-2 gap-8"
+            className="grid md:grid-cols-2 gap-6"
           >
             {projects.map((project, index) => (
               <motion.div
                 key={project.title}
                 variants={projectVariants}
-                className="group glass-card overflow-hidden"
-                whileHover={{ 
-                  y: -10,
-                  boxShadow: '0 20px 50px hsl(var(--primary) / 0.15)'
+                className="group vscode-panel rounded-sm overflow-hidden"
+                whileHover={{
+                  y: -8,
+                  boxShadow: '0 15px 40px hsl(var(--primary) / 0.15)'
                 }}
                 transition={{ type: 'spring', stiffness: 300 }}
               >
-                {/* Project Header with Gradient */}
-                <div className={`h-48 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-                  <motion.div
-                    className="absolute inset-0 grid-pattern opacity-30"
-                    animate={{ 
-                      backgroundPosition: ['0% 0%', '100% 100%']
-                    }}
-                    transition={{ 
-                      duration: 20,
-                      repeat: Infinity,
-                      ease: 'linear'
-                    }}
-                  />
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <motion.div
-                      className="w-20 h-20 rounded-2xl bg-background/20 backdrop-blur-sm border border-foreground/10 flex items-center justify-center"
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                      transition={{ type: 'spring', stiffness: 300 }}
-                    >
-                      <project.icon className="w-10 h-10 text-foreground" />
-                    </motion.div>
+                {/* Terminal-style header */}
+                <div className="flex items-center gap-2 px-4 py-2 border-b border-border" style={{ background: 'hsl(var(--vscode-terminal))' }}>
+                  <div className="flex gap-1.5">
+                    <span className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: 'hsl(var(--syntax-function))' }} />
+                    <span className="w-2.5 h-2.5 rounded-full" style={{ background: 'hsl(var(--syntax-string))' }} />
                   </div>
+                  <span className="font-mono text-xs text-muted-foreground">project_{index}.tsx</span>
+                </div>
+
+                {/* Project icon area */}
+                <div className="h-36 flex items-center justify-center relative" style={{ background: 'hsl(var(--vscode-terminal))' }}>
+                  <motion.div
+                    className="w-16 h-16 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center"
+                    whileHover={{ scale: 1.2, rotate: 5 }}
+                    transition={{ type: 'spring', stiffness: 300 }}
+                  >
+                    <project.icon className="w-8 h-8 text-primary" />
+                  </motion.div>
                 </div>
 
                 {/* Project Content */}
-                <div className="p-6">
-                  <motion.h3
-                    className="text-xl font-bold mb-3 group-hover:text-primary transition-colors"
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    viewport={{ once: true }}
-                  >
+                <div className="p-5">
+                  <div className="font-mono text-xs syntax-comment mb-2">{'// '}{project.title.toLowerCase().replace(/ /g, '_')}</div>
+                  <h3 className="font-mono text-lg font-bold syntax-function mb-2 group-hover:text-primary transition-colors">
                     {project.title}
-                  </motion.h3>
-                  <p className="text-muted-foreground mb-4 leading-relaxed">
+                  </h3>
+                  <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
 
                   {/* Tags */}
-                  <div className="flex flex-wrap gap-2 mb-6">
+                  <div className="flex flex-wrap gap-1.5 mb-5">
                     {project.tags.map((tag, tagIndex) => (
                       <motion.span
                         key={tag}
@@ -129,7 +111,7 @@ const ProjectsSection = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ delay: tagIndex * 0.1 }}
-                        className="px-3 py-1 rounded-full bg-muted text-muted-foreground text-xs font-medium"
+                        className="px-2 py-0.5 rounded-sm bg-muted text-muted-foreground text-xs font-mono border border-border"
                       >
                         {tag}
                       </motion.span>
@@ -141,21 +123,30 @@ const ProjectsSection = () => {
                     href={project.link}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-primary text-primary-foreground rounded-lg font-medium hover:bg-primary/90 transition-all w-full justify-center"
+                    className="inline-flex items-center gap-2 px-5 py-2 bg-primary text-primary-foreground rounded-sm font-mono text-sm hover:bg-primary/90 transition-all w-full justify-center"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    View Live Demo
+                    {'>'} open_demo()
                     <motion.span
-                      animate={{ x: [0, 4, 0] }}
+                      animate={{ x: [0, 3, 0] }}
                       transition={{ duration: 1.5, repeat: Infinity }}
                     >
-                      <ExternalLink className="w-4 h-4" />
+                      <ExternalLink className="w-3.5 h-3.5" />
                     </motion.span>
                   </motion.a>
                 </div>
               </motion.div>
             ))}
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-mono text-sm mt-8 text-foreground"
+          >
+            ];
           </motion.div>
         </div>
       </div>
