@@ -1,88 +1,93 @@
 import { Award, Cloud, Shield, Network, Code, Monitor } from 'lucide-react';
+import { motion } from 'framer-motion';
 
 const certifications = [
-  {
-    title: 'Microsoft Azure AI Fundamentals',
-    issuer: 'Microsoft',
-    icon: Cloud,
-    color: 'from-blue-500/20 to-cyan-500/20',
-  },
-  {
-    title: 'Microsoft Cybersecurity Fundamentals',
-    issuer: 'Microsoft',
-    icon: Shield,
-    color: 'from-purple-500/20 to-pink-500/20',
-  },
-  {
-    title: 'Networking & Server Setup',
-    issuer: 'Professional Training',
-    icon: Network,
-    color: 'from-emerald-500/20 to-teal-500/20',
-  },
-  {
-    title: 'CSS & Web Development',
-    issuer: 'Professional Training',
-    icon: Code,
-    color: 'from-orange-500/20 to-amber-500/20',
-  },
-  {
-    title: 'Computer Systems & Network Maintenance',
-    issuer: 'Professional Training',
-    icon: Monitor,
-    color: 'from-rose-500/20 to-red-500/20',
-  },
+  { title: 'Microsoft Azure AI Fundamentals', issuer: 'Microsoft', icon: Cloud },
+  { title: 'Microsoft Cybersecurity Fundamentals', issuer: 'Microsoft', icon: Shield },
+  { title: 'Networking & Server Setup', issuer: 'Professional Training', icon: Network },
+  { title: 'CSS & Web Development', issuer: 'Professional Training', icon: Code },
+  { title: 'Computer Systems & Network Maintenance', issuer: 'Professional Training', icon: Monitor },
 ];
+
+const containerVariants = {
+  hidden: { opacity: 0 },
+  visible: { opacity: 1, transition: { staggerChildren: 0.1 } },
+};
+
+const cardVariants = {
+  hidden: { opacity: 0, y: 30 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } },
+};
 
 const CertificationsSection = () => {
   return (
-    <section id="certifications" className="py-20 md:py-32 relative bg-secondary/30">
+    <section id="certifications" className="py-20 md:py-32 relative" style={{ background: 'hsl(var(--vscode-sidebar))' }}>
       <div className="container mx-auto px-4 md:px-6">
         <div className="max-w-6xl mx-auto">
           {/* Section Header */}
-          <div className="text-center mb-16">
-            <span className="inline-block px-4 py-2 rounded-full bg-primary/10 border border-primary/30 text-primary text-sm font-medium mb-4">
-              Certifications
-            </span>
-            <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4">
-              Professional <span className="gradient-text">Credentials</span>
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-100px' }}
+            transition={{ duration: 0.6 }}
+            className="mb-16"
+          >
+            <div className="font-mono text-sm mb-2">
+              <span className="syntax-comment">{'// section: certifications'}</span>
+            </div>
+            <h2 className="text-3xl md:text-4xl font-bold">
+              <span className="syntax-keyword">enum</span>{' '}
+              <span className="syntax-type">Certifications</span>{' '}
+              <span className="text-foreground">{'{'}</span>
             </h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Continuous learning and professional development
-            </p>
-          </div>
+          </motion.div>
 
           {/* Certifications Grid */}
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: '-50px' }}
+            variants={containerVariants}
+            className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4"
+          >
             {certifications.map((cert, index) => (
-              <div
+              <motion.div
                 key={cert.title}
-                className="glass-card overflow-hidden hover-lift group"
-                style={{ animationDelay: `${index * 0.1}s` }}
+                variants={cardVariants}
+                className="vscode-panel rounded-sm p-5 group"
+                whileHover={{
+                  y: -5,
+                  boxShadow: '0 10px 30px hsl(var(--primary) / 0.12)'
+                }}
+                transition={{ type: 'spring', stiffness: 300 }}
               >
-                {/* Gradient Header */}
-                <div className={`h-24 bg-gradient-to-br ${cert.color} relative`}>
-                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-14 h-14 rounded-xl bg-background/20 backdrop-blur-sm border border-foreground/10 flex items-center justify-center group-hover:scale-110 transition-transform duration-300">
-                      <cert.icon className="w-7 h-7 text-foreground" />
+                <div className="flex items-start gap-3">
+                  <div className="w-10 h-10 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center flex-shrink-0 group-hover:bg-primary/20 transition-colors">
+                    <cert.icon className="w-5 h-5 text-primary" />
+                  </div>
+                  <div>
+                    <div className="flex items-center gap-1.5 mb-1">
+                      <Award className="w-3.5 h-3.5 text-primary" />
+                      <span className="font-mono text-xs syntax-comment">cert[{index}]</span>
                     </div>
+                    <h3 className="font-mono text-sm font-semibold text-foreground group-hover:syntax-function transition-colors mb-1">
+                      {cert.title}
+                    </h3>
+                    <p className="font-mono text-xs syntax-string">"{cert.issuer}"</p>
                   </div>
                 </div>
-
-                {/* Content */}
-                <div className="p-5">
-                  <div className="flex items-start gap-3">
-                    <Award className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
-                    <div>
-                      <h3 className="font-semibold mb-1 group-hover:text-primary transition-colors">
-                        {cert.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            viewport={{ once: true }}
+            className="font-mono text-sm mt-8 text-foreground"
+          >
+            {'}'};
+          </motion.div>
         </div>
       </div>
     </section>
