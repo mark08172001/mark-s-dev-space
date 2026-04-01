@@ -2,11 +2,11 @@ import { Award, Cloud, Shield, Network, Code, Monitor } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const certifications = [
-  { title: 'Microsoft Azure AI Fundamentals', issuer: 'Microsoft', icon: Cloud },
-  { title: 'Microsoft Cybersecurity Fundamentals', issuer: 'Microsoft', icon: Shield },
-  { title: 'Networking & Server Setup', issuer: 'Professional Training', icon: Network },
-  { title: 'CSS & Web Development', issuer: 'Professional Training', icon: Code },
-  { title: 'Computer Systems & Network Maintenance', issuer: 'Professional Training', icon: Monitor },
+  { title: 'Microsoft Azure AI Fundamentals', issuer: 'TESDA', icon: Cloud },
+  { title: 'Microsoft Cybersecurity Fundamentals', issuer: 'TESDA', icon: Shield },
+  { title: 'Networking & Server Setup', issuer: 'TESDA', icon: Network },
+  { title: 'CSS & Web Development', issuer: 'TESDA', icon: Code },
+  { title: 'Computer Systems & Network Maintenance', issuer: 'TESDA', icon: Monitor },
 ];
 
 const containerVariants = {
