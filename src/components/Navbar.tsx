@@ -36,7 +36,7 @@ const Navbar = () => {
   }, []);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex flex-col">
+    <nav className="sticky top-0 z-40 flex flex-col">
       {/* Title Bar */}
       <div className="h-8 flex items-center px-4 text-xs font-mono"
         style={{ background: 'hsl(var(--vscode-titlebar))' }}
