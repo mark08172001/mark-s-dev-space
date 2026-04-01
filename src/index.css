@@ -6,7 +6,7 @@
 
 @layer base {
   :root {
-    /* VS Code Dark Theme */
+    /* VS Code Dark Theme (default) */
     --background: 220 13% 18%;
     --foreground: 220 13% 91%;
 
@@ -73,6 +73,204 @@
     --sidebar-accent-foreground: 220 13% 91%;
     --sidebar-border: 220 13% 28%;
     --sidebar-ring: 207 90% 61%;
+  }
+
+  /* Monokai Theme */
+  [data-theme="monokai"] {
+    --background: 70 8% 15%;
+    --foreground: 60 30% 96%;
+
+    --card: 70 8% 18%;
+    --card-foreground: 60 30% 96%;
+
+    --popover: 70 8% 18%;
+    --popover-foreground: 60 30% 96%;
+
+    --primary: 80 76% 53%;
+    --primary-foreground: 70 8% 10%;
+
+    --secondary: 70 8% 22%;
+    --secondary-foreground: 60 30% 96%;
+
+    --muted: 70 8% 20%;
+    --muted-foreground: 50 5% 55%;
+
+    --accent: 338 95% 56%;
+    --accent-foreground: 60 30% 96%;
+
+    --destructive: 0 72% 63%;
+    --destructive-foreground: 60 30% 96%;
+
+    --border: 70 8% 24%;
+    --input: 70 8% 22%;
+    --ring: 80 76% 53%;
+
+    --vscode-titlebar: 70 8% 11%;
+    --vscode-sidebar: 70 8% 13%;
+    --vscode-editor: 70 8% 15%;
+    --vscode-terminal: 70 8% 10%;
+    --vscode-tab-active: 70 8% 15%;
+    --vscode-tab-inactive: 70 8% 12%;
+    --vscode-statusbar: 261 50% 38%;
+    --vscode-line-number: 50 5% 38%;
+    --vscode-selection: 210 30% 25%;
+    --vscode-minimap: 70 8% 19%;
+
+    --syntax-keyword: 338 95% 56%;
+    --syntax-string: 54 70% 68%;
+    --syntax-number: 261 100% 75%;
+    --syntax-function: 80 76% 53%;
+    --syntax-variable: 187 73% 57%;
+    --syntax-comment: 50 5% 42%;
+    --syntax-type: 187 73% 57%;
+    --syntax-operator: 338 95% 56%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(80 76% 53%), hsl(338 95% 56%));
+    --gradient-card: linear-gradient(135deg, hsl(70 8% 18%), hsl(70 8% 16%));
+    --gradient-hero: linear-gradient(180deg, hsl(70 8% 11%), hsl(70 8% 15%));
+    --shadow-elegant: 0 4px 20px hsl(0 0% 0% / 0.4);
+    --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.3);
+
+    --sidebar-background: 70 8% 13%;
+    --sidebar-foreground: 60 30% 96%;
+    --sidebar-primary: 80 76% 53%;
+    --sidebar-primary-foreground: 70 8% 10%;
+    --sidebar-accent: 70 8% 20%;
+    --sidebar-accent-foreground: 60 30% 96%;
+    --sidebar-border: 70 8% 24%;
+    --sidebar-ring: 80 76% 53%;
+  }
+
+  /* Light Theme */
+  [data-theme="light"] {
+    --background: 0 0% 96%;
+    --foreground: 220 13% 18%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 220 13% 18%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 13% 18%;
+
+    --primary: 207 90% 45%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 220 13% 90%;
+    --secondary-foreground: 220 13% 18%;
+
+    --muted: 220 13% 92%;
+    --muted-foreground: 220 13% 46%;
+
+    --accent: 207 90% 45%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 72% 50%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 220 13% 85%;
+    --input: 220 13% 90%;
+    --ring: 207 90% 45%;
+
+    --vscode-titlebar: 220 13% 88%;
+    --vscode-sidebar: 220 13% 94%;
+    --vscode-editor: 0 0% 96%;
+    --vscode-terminal: 220 13% 92%;
+    --vscode-tab-active: 0 0% 100%;
+    --vscode-tab-inactive: 220 13% 92%;
+    --vscode-statusbar: 207 90% 45%;
+    --vscode-line-number: 220 13% 70%;
+    --vscode-selection: 207 50% 85%;
+    --vscode-minimap: 220 13% 90%;
+
+    --syntax-keyword: 207 90% 45%;
+    --syntax-string: 29 80% 44%;
+    --syntax-number: 95 60% 35%;
+    --syntax-function: 286 60% 45%;
+    --syntax-variable: 207 90% 45%;
+    --syntax-comment: 220 13% 60%;
+    --syntax-type: 170 70% 35%;
+    --syntax-operator: 220 13% 30%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(207 90% 45%), hsl(286 60% 45%));
+    --gradient-card: linear-gradient(135deg, hsl(0 0% 100%), hsl(220 13% 97%));
+    --gradient-hero: linear-gradient(180deg, hsl(220 13% 88%), hsl(0 0% 96%));
+    --shadow-elegant: 0 4px 20px hsl(0 0% 0% / 0.08);
+    --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.06);
+
+    --sidebar-background: 220 13% 94%;
+    --sidebar-foreground: 220 13% 18%;
+    --sidebar-primary: 207 90% 45%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 220 13% 90%;
+    --sidebar-accent-foreground: 220 13% 18%;
+    --sidebar-border: 220 13% 85%;
+    --sidebar-ring: 207 90% 45%;
+  }
+
+  /* GitHub Dark Theme */
+  [data-theme="github-dark"] {
+    --background: 215 21% 11%;
+    --foreground: 210 17% 82%;
+
+    --card: 215 19% 14%;
+    --card-foreground: 210 17% 82%;
+
+    --popover: 215 19% 14%;
+    --popover-foreground: 210 17% 82%;
+
+    --primary: 212 92% 62%;
+    --primary-foreground: 215 21% 8%;
+
+    --secondary: 215 19% 18%;
+    --secondary-foreground: 210 17% 82%;
+
+    --muted: 215 19% 16%;
+    --muted-foreground: 215 14% 50%;
+
+    --accent: 130 60% 55%;
+    --accent-foreground: 215 21% 8%;
+
+    --destructive: 0 72% 63%;
+    --destructive-foreground: 210 17% 82%;
+
+    --border: 215 19% 22%;
+    --input: 215 19% 18%;
+    --ring: 212 92% 62%;
+
+    --vscode-titlebar: 215 21% 8%;
+    --vscode-sidebar: 215 21% 10%;
+    --vscode-editor: 215 21% 11%;
+    --vscode-terminal: 215 21% 8%;
+    --vscode-tab-active: 215 21% 11%;
+    --vscode-tab-inactive: 215 21% 9%;
+    --vscode-statusbar: 212 92% 35%;
+    --vscode-line-number: 215 14% 35%;
+    --vscode-selection: 212 40% 25%;
+    --vscode-minimap: 215 19% 15%;
+
+    --syntax-keyword: 340 82% 66%;
+    --syntax-string: 195 70% 60%;
+    --syntax-number: 195 70% 60%;
+    --syntax-function: 270 60% 70%;
+    --syntax-variable: 212 92% 62%;
+    --syntax-comment: 215 14% 42%;
+    --syntax-type: 130 60% 55%;
+    --syntax-operator: 340 82% 66%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(212 92% 62%), hsl(270 60% 70%));
+    --gradient-card: linear-gradient(135deg, hsl(215 19% 14%), hsl(215 19% 12%));
+    --gradient-hero: linear-gradient(180deg, hsl(215 21% 8%), hsl(215 21% 11%));
+    --shadow-elegant: 0 4px 20px hsl(0 0% 0% / 0.5);
+    --shadow-card: 0 2px 12px hsl(0 0% 0% / 0.4);
+
+    --sidebar-background: 215 21% 10%;
+    --sidebar-foreground: 210 17% 82%;
+    --sidebar-primary: 212 92% 62%;
+    --sidebar-primary-foreground: 215 21% 8%;
+    --sidebar-accent: 215 19% 16%;
+    --sidebar-accent-foreground: 210 17% 82%;
+    --sidebar-border: 215 19% 22%;
+    --sidebar-ring: 212 92% 62%;
   }
 }
 
