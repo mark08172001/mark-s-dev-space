@@ -117,9 +117,12 @@ const ExperienceSection = () => {
 
                   <h3 className="text-lg font-mono font-bold syntax-function mb-1">{exp.title}</h3>
 
-                  <div className="flex items-center gap-2 text-muted-foreground mb-4">
+                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Building2 className="w-3.5 h-3.5" />
                     <span className="text-sm font-mono syntax-string">"{exp.company}"</span>
+                  </div>
+                  <div className="text-xs font-mono syntax-comment mb-4 pl-5">
+                    {`// ${exp.location}`}
                   </div>
 
                   <ul className="space-y-1.5">
