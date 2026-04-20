@@ -4,26 +4,40 @@ import { motion } from 'framer-motion';
 const experiences = [
   {
     title: 'Business Application Developer',
-    company: 'Forecasting and Planning Technologies, Inc.',
-    type: 'Contractual',
-    period: '2024',
+    company: 'Forecasting and Planning Technologies Inc.',
+    location: 'Makati City, Philippines',
+    type: 'Full-time',
+    period: '11/2024 – 07/2025',
     responsibilities: [
-      'Developed and optimized web application modules',
-      'Designed and implemented user interfaces',
-      'Created SQL stored procedures and functions',
-      'Participated in system integration, testing, and deployment',
+      'Led development activities including planning, defining, and designing significant software modules',
+      'Developed and optimized stored procedures, functions, and user interfaces',
+      'Coordinated system integration and data loading requirements during technical meetings',
     ],
   },
   {
-    title: 'On-the-Job Trainee – QA/QC',
-    company: 'Forecasting and Planning Technologies, Inc.',
-    type: 'Internship',
-    period: '2024',
+    title: 'Quality Assurance / Quality Control',
+    company: 'Forecasting and Planning Technologies Inc.',
+    location: 'Makati City, Philippines',
+    type: 'Full-time',
+    period: '11/2024 – 07/2025',
     responsibilities: [
-      'Performed Quality Assurance & Quality Control testing',
-      'Prepared testing templates and documentation',
-      'Assisted in software testing and bug reporting',
-      'Experience with PC building, OS installation, troubleshooting, and networking',
+      'Performed quality assurance and quality control to ensure system stability',
+      'Executed manual test cases to validate system functionality',
+      'Identified, documented, and tracked bugs',
+      'Conducted regression testing before deployment to maintain system stability',
+    ],
+  },
+  {
+    title: 'Quality Assurance Tester (Intern)',
+    company: 'Forecasting and Planning Technologies Inc.',
+    location: 'Makati City, Philippines',
+    type: 'Internship',
+    period: '01/2024 – 04/2024',
+    responsibilities: [
+      'Designed and executed test cases and test scenarios for new features',
+      'Performed functional and UI testing across modules',
+      'Logged and tracked defects, ensuring proper resolution before release',
+      'Assisted in improving test documentation and QA processes',
     ],
   },
 ];
@@ -103,9 +117,12 @@ const ExperienceSection = () => {
 
                   <h3 className="text-lg font-mono font-bold syntax-function mb-1">{exp.title}</h3>
 
-                  <div className="flex items-center gap-2 text-muted-foreground mb-4">
+                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
                     <Building2 className="w-3.5 h-3.5" />
                     <span className="text-sm font-mono syntax-string">"{exp.company}"</span>
+                  </div>
+                  <div className="text-xs font-mono syntax-comment mb-4 pl-5">
+                    {`// ${exp.location}`}
                   </div>
 
                   <ul className="space-y-1.5">
