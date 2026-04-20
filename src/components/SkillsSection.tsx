@@ -1,31 +1,38 @@
-import { Code, Database, Shield, Monitor, Wrench } from 'lucide-react';
+import { Code, Bug, Wrench } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
     icon: Code,
-    title: 'Programming & Web',
-    skills: ['HTML', 'CSS', 'JavaScript', 'C#', 'SQL'],
+    title: 'Technical Skills',
+    skills: [
+      'Full-Stack Development',
+      'MS SQL / Database Management',
+      'Stored Procedures',
+      'C#',
+      'Java',
+      'PHP',
+      'JavaScript',
+      'HTML & CSS',
+      'Git Version Control',
+    ],
   },
   {
-    icon: Database,
-    title: 'Development',
-    skills: ['Full Stack Development', 'Business Applications', 'System Integration', 'Database Design'],
-  },
-  {
-    icon: Shield,
-    title: 'Quality Assurance',
-    skills: ['QA/QC Testing', 'Software Testing', 'Documentation', 'Bug Reporting'],
-  },
-  {
-    icon: Monitor,
-    title: 'Tools & Platforms',
-    skills: ['Microsoft Word', 'Microsoft Excel', 'Microsoft PowerPoint', 'Visual Studio'],
+    icon: Bug,
+    title: 'Testing',
+    skills: [
+      'Manual Testing',
+      'Quality Assurance (QA)',
+      'Quality Control (QC)',
+      'Test Case Preparation',
+      'Bug Tracking',
+      'Software Testing',
+    ],
   },
   {
     icon: Wrench,
-    title: 'Technical Skills',
-    skills: ['PC Building', 'OS Installation', 'Troubleshooting', 'Networking'],
+    title: 'Tools',
+    skills: ['Canva', 'Figma', 'Administrative Tools'],
   },
 ];
 
