@@ -1,4 +1,4 @@
-import { ExternalLink, Leaf, Globe } from 'lucide-react';
+import { ExternalLink, Leaf, Globe, HeartPulse } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -15,6 +15,12 @@ const projects = [
     link: 'https://soilfertility.vercel.app/',
     icon: Globe,
     tags: ['Frontend', 'Information System', 'Clean Design'],
+  {
+    title: 'BGH Basic Website',
+    description: 'A hospital management website with essential CRUD functionalities. Enables hospital staff to manage patient, admission, treatment, and other key records efficiently through intuitive user interfaces.',
+    link: 'https://github.com/mark08172001/BGH-Basic-Website.git',
+    icon: HeartPulse,
+    tags: ['Hospital Management', 'CRUD', 'Web Development'],
   },
 ];
 
