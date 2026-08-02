@@ -23,6 +23,14 @@ const projects = [
     icon: HeartPulse,
     tags: ['Hospital Management', 'CRUD', 'Web Development'],
   },
+  {
+    title: 'BuildForge AI',
+    description: 'Your all-in-one platform for exploring the latest computer parts and building your dream PC or laptop. Set your budget, choose your purpose, and our AI will instantly recommend a complete, compatible list of components that delivers the best performance for your money.',
+    link: 'https://buildforge-ai-beta.vercel.app/',
+    icon: Cpu,
+    tags: ['AI Recommendation', 'PC Builder', 'Web Development'],
+    ongoing: true,
+  },
 ];
 
 const containerVariants = {
