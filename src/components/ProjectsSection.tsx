@@ -115,8 +115,8 @@ const ProjectsSection = () => {
                       {project.title}
                     </h3>
                     {project.ongoing && (
-                      <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-yellow-500/15 text-yellow-500 text-[10px] font-mono border border-yellow-500/30">
-                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-warning/15 text-warning text-[10px] font-mono border border-warning/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse" />
                         ongoing
                       </span>
                     )}
