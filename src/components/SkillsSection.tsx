@@ -1,38 +1,35 @@
-import { Code, Bug, Wrench } from 'lucide-react';
+import { Code, Bug, Workflow } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const skillCategories = [
   {
     icon: Code,
-    title: 'Technical Skills',
-    skills: [
-      'Full-Stack Development',
-      'MS SQL / Database Management',
-      'Stored Procedures',
-      'C#',
-      'Java',
-      'PHP',
-      'JavaScript',
-      'HTML & CSS',
-      'Git Version Control',
-    ],
+    title: 'Programming & Development',
+    skills: ['C#', 'PHP', 'JavaScript', 'Java', 'HTML', 'CSS', 'Next.js', 'Tailwind CSS'],
   },
   {
     icon: Bug,
-    title: 'Testing',
+    title: 'Software Testing',
     skills: [
       'Manual Testing',
+      'Functional Testing',
+      'Regression Testing',
+      'Test Case Design',
+      'Defect Tracking & Reporting',
       'Quality Assurance (QA)',
       'Quality Control (QC)',
-      'Test Case Preparation',
-      'Bug Tracking',
-      'Software Testing',
+      'User Acceptance Testing (UAT)',
     ],
   },
   {
-    icon: Wrench,
-    title: 'Tools',
-    skills: ['Canva', 'Figma', 'Administrative Tools'],
+    icon: Workflow,
+    title: 'Methodologies',
+    skills: [
+      'Software Development Life Cycle (SDLC)',
+      'Debugging & Troubleshooting',
+      'System Integration Testing',
+      'Agile Development',
+    ],
   },
 ];
 
