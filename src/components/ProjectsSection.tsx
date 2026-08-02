@@ -1,4 +1,4 @@
-import { ExternalLink, Leaf, Globe, HeartPulse } from 'lucide-react';
+import { ExternalLink, Leaf, Globe, HeartPulse, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
