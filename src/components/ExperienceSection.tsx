@@ -3,41 +3,32 @@ import { motion } from 'framer-motion';
 
 const experiences = [
   {
+    title: 'Freelance Web Developer',
+    company: 'Self-employed',
+    location: 'Baguio City, Philippines',
+    type: 'Freelance',
+    period: '07/2025 – Present',
+    responsibilities: [
+      'Developed and deployed web applications using Next.js and Tailwind CSS',
+      'Leveraged AI tools to streamline development and improve code quality',
+      'Conducted QA testing, debugging, and performance optimization',
+      'Built dashboards, reporting modules, and Excel/CSV export functionality',
+      'Managed projects from requirements gathering to deployment',
+    ],
+  },
+  {
     title: 'Business Application Developer',
     company: 'Forecasting and Planning Technologies Inc.',
     location: 'Makati City, Philippines',
     type: 'Full-time',
     period: '11/2024 – 07/2025',
     responsibilities: [
-      'Led development activities including planning, defining, and designing significant software modules',
-      'Developed and optimized stored procedures, functions, and user interfaces',
-      'Coordinated system integration and data loading requirements during technical meetings',
-    ],
-  },
-  {
-    title: 'Quality Assurance / Quality Control',
-    company: 'Forecasting and Planning Technologies Inc.',
-    location: 'Makati City, Philippines',
-    type: 'Full-time',
-    period: '11/2024 – 07/2025',
-    responsibilities: [
-      'Performed quality assurance and quality control to ensure system stability',
-      'Executed manual test cases to validate system functionality',
-      'Identified, documented, and tracked bugs',
-      'Conducted regression testing before deployment to maintain system stability',
-    ],
-  },
-  {
-    title: 'Quality Assurance Tester (Intern)',
-    company: 'Forecasting and Planning Technologies Inc.',
-    location: 'Makati City, Philippines',
-    type: 'Internship',
-    period: '01/2024 – 04/2024',
-    responsibilities: [
-      'Designed and executed test cases and test scenarios for new features',
-      'Performed functional and UI testing across modules',
-      'Logged and tracked defects, ensuring proper resolution before release',
-      'Assisted in improving test documentation and QA processes',
+      'Developed and maintained business applications, SQL Server stored procedures, and user interface components',
+      'Participated in software analysis, design, development, and implementation of system enhancements',
+      'Created and executed manual test cases, performing functional, regression, and UI testing',
+      'Identified, documented, and tracked software defects, ensuring timely resolution before deployment',
+      'Collaborated with developers and business analysts on system integration, data migration, and technical requirements',
+      'Supported QA/QC activities, database management, troubleshooting, and pre-deployment validation',
     ],
   },
 ];
