@@ -110,9 +110,17 @@ const ProjectsSection = () => {
                 {/* Project Content */}
                 <div className="p-5">
                   <div className="font-mono text-xs syntax-comment mb-2">{'// '}{project.title.toLowerCase().replace(/ /g, '_')}</div>
-                  <h3 className="font-mono text-lg font-bold syntax-function mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="font-mono text-lg font-bold syntax-function group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    {project.ongoing && (
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-yellow-500/15 text-yellow-500 text-[10px] font-mono border border-yellow-500/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-yellow-500 animate-pulse" />
+                        ongoing
+                      </span>
+                    )}
+                  </div>
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
