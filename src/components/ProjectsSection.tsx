@@ -1,4 +1,4 @@
-import { ExternalLink, Leaf, Globe, HeartPulse } from 'lucide-react';
+import { ExternalLink, Leaf, Globe, HeartPulse, Cpu } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 const projects = [
@@ -22,6 +22,14 @@ const projects = [
     link: 'https://github.com/mark08172001/BGH-Basic-Website.git',
     icon: HeartPulse,
     tags: ['Hospital Management', 'CRUD', 'Web Development'],
+  },
+  {
+    title: 'BuildForge AI',
+    description: 'Your all-in-one platform for exploring the latest computer parts and building your dream PC or laptop. Set your budget, choose your purpose, and our AI will instantly recommend a complete, compatible list of components that delivers the best performance for your money.',
+    link: 'https://buildforge-ai-beta.vercel.app/',
+    icon: Cpu,
+    tags: ['AI Recommendation', 'PC Builder', 'Web Development'],
+    ongoing: true,
   },
 ];
 
@@ -102,9 +110,17 @@ const ProjectsSection = () => {
                 {/* Project Content */}
                 <div className="p-5">
                   <div className="font-mono text-xs syntax-comment mb-2">{'// '}{project.title.toLowerCase().replace(/ /g, '_')}</div>
-                  <h3 className="font-mono text-lg font-bold syntax-function mb-2 group-hover:text-primary transition-colors">
-                    {project.title}
-                  </h3>
+                  <div className="flex items-start justify-between gap-3 mb-2">
+                    <h3 className="font-mono text-lg font-bold syntax-function group-hover:text-primary transition-colors">
+                      {project.title}
+                    </h3>
+                    {project.ongoing && (
+                      <span className="shrink-0 inline-flex items-center gap-1 px-2 py-0.5 rounded-sm bg-warning/15 text-warning text-[10px] font-mono border border-warning/30">
+                        <span className="w-1.5 h-1.5 rounded-full bg-warning animate-pulse" />
+                        ongoing
+                      </span>
+                    )}
+                  </div>
                   <p className="text-muted-foreground text-sm mb-4 leading-relaxed">
                     {project.description}
                   </p>
