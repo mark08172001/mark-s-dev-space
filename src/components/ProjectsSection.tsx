@@ -15,6 +15,7 @@ const projects = [
     link: 'https://soilfertility.vercel.app/',
     icon: Globe,
     tags: ['Frontend', 'Information System', 'Clean Design'],
+  },
   {
     title: 'BGH Basic Website',
     description: 'A hospital management website with essential CRUD functionalities. Enables hospital staff to manage patient, admission, treatment, and other key records efficiently through intuitive user interfaces.',
