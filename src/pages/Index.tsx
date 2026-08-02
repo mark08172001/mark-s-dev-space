@@ -11,12 +11,14 @@ import ContactSection from '@/components/ContactSection';
 import Footer from '@/components/Footer';
 import VSCodeSidebar from '@/components/VSCodeSidebar';
 import VSCodeTerminal from '@/components/VSCodeTerminal';
+import PageLoader from '@/components/PageLoader';
 
 const Index = () => {
   const [sidebarCollapsed, setSidebarCollapsed] = useState(false);
 
   return (
     <div className="min-h-screen bg-background flex">
+      <PageLoader />
       <VSCodeSidebar collapsed={sidebarCollapsed} onToggle={() => setSidebarCollapsed(!sidebarCollapsed)} />
       <div className="flex-1 flex flex-col min-w-0">
         <Navbar />
