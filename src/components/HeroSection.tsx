@@ -208,53 +208,55 @@ const HeroSection = () => {
               initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-center justify-center order-1 lg:order-2 lg:col-span-5 relative"
+              className="flex flex-col items-center justify-start pt-10 order-1 lg:order-2 lg:col-span-5 relative h-[600px] md:h-[700px] w-full"
             >
-              <div className="w-full max-w-[340px] md:max-w-[400px] lg:max-w-[420px] h-[460px] md:h-[520px] relative flex flex-col items-center justify-center">
-                <BorderGlow
-                  borderRadius={18}
-                  glowRadius={35}
-                  glowIntensity={1.0}
-                  glowColor="210 90 70"
-                  colors={['#38bdf8', '#818cf8', '#c084fc']}
-                  backgroundColor="hsl(var(--card) / 0.7)"
-                  className="w-full h-full shadow-2xl backdrop-blur-md relative overflow-hidden"
-                >
-                  <div className="w-full h-full flex flex-col relative">
-                    {/* Badge top status bar */}
-                    <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
-                      <div className="flex items-center gap-2">
-                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                        <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
-                      </div>
-                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
-                        <Sparkles className="w-2.5 h-2.5" /> 3D Physics
-                      </span>
-                    </div>
+              <div className="absolute inset-0 top-[-100px] left-[-50px] right-[-50px] bottom-[-100px] z-10">
+                <LanyardErrorBoundary fallback={profileFallback}>
+                  <Suspense fallback={profileFallback}>
+                    <Lanyard
+                      position={[0, 0, 20]}
+                      gravity={[0, -40, 0]}
+                    >
+                      <BorderGlow
+                        borderRadius={18}
+                        glowRadius={35}
+                        glowIntensity={1.0}
+                        glowColor="210 90 70"
+                        colors={['#38bdf8', '#818cf8', '#c084fc']}
+                        backgroundColor="hsl(var(--card) / 0.7)"
+                        className="w-[340px] md:w-[400px] lg:w-[420px] h-[460px] md:h-[520px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
+                      >
+                        {/* Badge top status bar */}
+                        <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
+                          <div className="flex items-center gap-2">
+                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                            <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                          </div>
+                          <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
+                            <Sparkles className="w-2.5 h-2.5" /> 3D Physics
+                          </span>
+                        </div>
 
-                    {/* Interactive Lanyard 3D Canvas */}
-                    <div className="flex-1 w-full h-full relative cursor-grab active:cursor-grabbing">
-                      <LanyardErrorBoundary fallback={profileFallback}>
-                        <Suspense fallback={profileFallback}>
-                          <Lanyard
-                            position={[0, 0, 20]}
-                            gravity={[0, -40, 0]}
-                            frontImage={profilePhoto}
-                            backImage={profilePhoto}
-                            imageFit="cover"
-                          />
-                        </Suspense>
-                      </LanyardErrorBoundary>
-                    </div>
+                        {/* Profile Image (previously in Lanyard props, now rendered inside HTML card) */}
+                        <div className="flex-1 w-full h-full relative flex items-center justify-center p-6">
+                           <img
+                             src={profilePhoto}
+                             alt="Mark TJ T. Permison"
+                             className="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
+                             style={{ pointerEvents: 'none' }}
+                           />
+                        </div>
 
-                    {/* Badge bottom hint */}
-                    <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
-                      <span className="font-mono text-[11px] text-muted-foreground">
-                        ✦ Drag & swing 3D ID badge
-                      </span>
-                    </div>
-                  </div>
-                </BorderGlow>
+                        {/* Badge bottom hint */}
+                        <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                          <span className="font-mono text-[11px] text-muted-foreground">
+                            ✦ Drag & swing 3D ID badge
+                          </span>
+                        </div>
+                      </BorderGlow>
+                    </Lanyard>
+                  </Suspense>
+                </LanyardErrorBoundary>
               </div>
             </motion.div>
           </div>

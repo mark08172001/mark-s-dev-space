@@ -2,7 +2,7 @@
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { Canvas, extend, useFrame } from '@react-three/fiber';
-import { useGLTF, useTexture, Environment, Lightformer } from '@react-three/drei';
+import { useGLTF, useTexture, Environment, Lightformer, Html } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
 
@@ -29,7 +29,8 @@ export default function Lanyard({
   backImage = null,
   imageFit = 'cover',
   lanyardImage = null,
-  lanyardWidth = 1
+  lanyardWidth = 1,
+  children
 }) {
   const [isMobile, setIsMobile] = useState(() => typeof window !== 'undefined' && window.innerWidth < 768);
 
@@ -56,7 +57,9 @@ export default function Lanyard({
             imageFit={imageFit}
             lanyardImage={lanyardImage}
             lanyardWidth={lanyardWidth}
-          />
+          >
+            {children}
+          </Band>
         </Physics>
         <Environment blur={0.75}>
           <Lightformer
@@ -101,7 +104,8 @@ function Band({
   backImage = null,
   imageFit = 'cover',
   lanyardImage = null,
-  lanyardWidth = 1
+  lanyardWidth = 1,
+  children
 }) {
   const band = useRef(),
     fixed = useRef(),
@@ -242,7 +246,12 @@ function Band({
               drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
             )}
           >
-            <mesh geometry={nodes.card.geometry}>
+            {children && (
+              <Html transform distanceFactor={1.2} position={[0, 0, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'none' }}>
+                {children}
+              </Html>
+            )}
+            <mesh geometry={nodes.card.geometry} visible={!children}>
               <meshPhysicalMaterial
                 map={cardMap}
                 map-anisotropy={16}
