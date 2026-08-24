@@ -1,11 +1,12 @@
 import { Code2, Briefcase, GraduationCap, Award } from 'lucide-react';
 import { motion } from 'framer-motion';
+import BorderGlow from './BorderGlow';
 
 const stats = [
-  { icon: Briefcase, value: '9+', label: 'Months Experience' },
-  { icon: Code2, value: '2+', label: 'Personal Projects' },
-  { icon: GraduationCap, value: 'BSIT', label: 'Degree Achieved' },
-  { icon: Award, value: '5+', label: 'Certifications' },
+  { icon: Briefcase, value: '9+', label: 'Months Experience', glowColor: '210 90 70', colors: ['#38bdf8', '#818cf8', '#6366f1'] },
+  { icon: Code2, value: '4+', label: 'Featured Projects', glowColor: '150 80 70', colors: ['#10b981', '#34d399', '#059669'] },
+  { icon: GraduationCap, value: 'BSIT', label: 'Degree Achieved', glowColor: '280 80 70', colors: ['#c084fc', '#a855f7', '#7c3aed'] },
+  { icon: Award, value: '5+', label: 'Certifications', glowColor: '45 90 70', colors: ['#f59e0b', '#fbbf24', '#d97706'] },
 ];
 
 const containerVariants = {
@@ -51,37 +52,68 @@ const AboutSection = () => {
               variants={containerVariants}
               className="space-y-4"
             >
-              <motion.div variants={itemVariants} className="vscode-panel rounded-sm p-4 md:p-6">
-                <div className="font-mono text-xs text-muted-foreground mb-3">{'/* About Me */'}</div>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  I am a <span className="syntax-type font-medium">BS Information Technology</span> graduate and an Entry-Level Full Stack / Business Application Developer with hands-on experience in software development and quality assurance.
-                </p>
-                <p className="text-muted-foreground leading-relaxed mb-4">
-                  During my time at <span className="syntax-string font-medium">"Forecasting and Planning Technologies, Inc."</span>, I worked as both a Business Application Developer (Contractual) and On-the-Job Trainee in QA/QC.
-                </p>
-                <p className="text-muted-foreground leading-relaxed">
-                  I specialize in <span className="syntax-variable font-medium">web development</span>, <span className="syntax-variable font-medium">system development</span>, <span className="syntax-variable font-medium">quality assurance</span>, and <span className="syntax-variable font-medium">technical support</span>.
-                </p>
+              <motion.div variants={itemVariants}>
+                <BorderGlow
+                  borderRadius={12}
+                  glowRadius={30}
+                  glowIntensity={0.9}
+                  glowColor="210 90 70"
+                  colors={['#38bdf8', '#818cf8', '#c084fc']}
+                  backgroundColor="hsl(var(--card))"
+                  className="w-full shadow-lg"
+                >
+                  <div className="p-4 md:p-6">
+                    <div className="font-mono text-xs text-muted-foreground mb-3">{'/* About Me */'}</div>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      I am a <span className="syntax-type font-medium">BS Information Technology</span> graduate and an Entry-Level Full Stack / Business Application Developer with hands-on experience in software development and quality assurance.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed mb-4">
+                      During my time at <span className="syntax-string font-medium">"Forecasting and Planning Technologies, Inc."</span>, I worked as both a Business Application Developer (Contractual) and On-the-Job Trainee in QA/QC.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      I specialize in <span className="syntax-variable font-medium">web development</span>, <span className="syntax-variable font-medium">system development</span>, <span className="syntax-variable font-medium">quality assurance</span>, and <span className="syntax-variable font-medium">technical support</span>.
+                    </p>
+                  </div>
+                </BorderGlow>
               </motion.div>
 
               {/* Quick Info - terminal style */}
               <motion.div variants={itemVariants} className="grid grid-cols-2 gap-3">
-                <div className="vscode-panel rounded-sm p-3">
-                  <span className="font-mono text-xs syntax-comment">// location</span>
-                  <p className="font-mono text-sm text-foreground mt-1">
-                    <span className="syntax-string">"Philippines"</span>
-                  </p>
-                </div>
-                <div className="vscode-panel rounded-sm p-3">
-                  <span className="font-mono text-xs syntax-comment">// email</span>
-                  <p className="font-mono text-xs text-foreground mt-1">
-                    <span className="syntax-string">"permisonmark17<br/>@gmail.com"</span>
-                  </p>
-                </div>
+                <BorderGlow
+                  borderRadius={10}
+                  glowRadius={20}
+                  glowIntensity={0.8}
+                  glowColor="150 80 70"
+                  colors={['#10b981', '#34d399', '#059669']}
+                  backgroundColor="hsl(var(--card))"
+                >
+                  <div className="p-3.5">
+                    <span className="font-mono text-xs syntax-comment">// location</span>
+                    <p className="font-mono text-sm text-foreground mt-1">
+                      <span className="syntax-string">"Philippines"</span>
+                    </p>
+                  </div>
+                </BorderGlow>
+
+                <BorderGlow
+                  borderRadius={10}
+                  glowRadius={20}
+                  glowIntensity={0.8}
+                  glowColor="210 90 70"
+                  colors={['#38bdf8', '#818cf8', '#c084fc']}
+                  backgroundColor="hsl(var(--card))"
+                >
+                  <div className="p-3.5">
+                    <span className="font-mono text-xs syntax-comment">// email</span>
+                    <p className="font-mono text-xs text-foreground mt-1 truncate">
+                      <span className="syntax-string">"permisonmark17@gmail.com"</span>
+                    </p>
+                  </div>
+                </BorderGlow>
               </motion.div>
             </motion.div>
 
-            {/* Stats Grid */}
+            {/* Stats Grid with BorderGlow */}
             <motion.div
               initial="hidden"
               whileInView="visible"
@@ -93,30 +125,39 @@ const AboutSection = () => {
                 <motion.div
                   key={stat.label}
                   variants={itemVariants}
-                  className="vscode-panel rounded-sm p-5 text-center group"
-                  whileHover={{
-                    y: -5,
-                    boxShadow: '0 10px 30px hsl(var(--primary) / 0.15)'
-                  }}
+                  whileHover={{ y: -4 }}
                   transition={{ type: 'spring', stiffness: 300 }}
+                  className="group"
                 >
-                  <motion.div
-                    className="w-12 h-12 mx-auto mb-3 rounded-sm bg-primary/10 border border-primary/30 flex items-center justify-center"
-                    whileHover={{ rotate: 360 }}
-                    transition={{ duration: 0.6 }}
+                  <BorderGlow
+                    borderRadius={12}
+                    glowRadius={25}
+                    glowIntensity={1.0}
+                    glowColor={stat.glowColor}
+                    colors={stat.colors}
+                    backgroundColor="hsl(var(--card))"
+                    className="w-full h-full text-center"
                   >
-                    <stat.icon className="w-6 h-6 text-primary" />
-                  </motion.div>
-                  <motion.div
-                    className="text-2xl font-mono font-bold syntax-function mb-1"
-                    initial={{ scale: 0 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.2 + index * 0.1, type: 'spring' }}
-                  >
-                    {stat.value}
-                  </motion.div>
-                  <div className="text-xs font-mono text-muted-foreground">{stat.label}</div>
+                    <div className="p-5 flex flex-col items-center justify-center">
+                      <motion.div
+                        className="w-12 h-12 mx-auto mb-3 rounded-lg bg-primary/10 border border-primary/30 flex items-center justify-center"
+                        whileHover={{ rotate: 360 }}
+                        transition={{ duration: 0.6 }}
+                      >
+                        <stat.icon className="w-6 h-6 text-primary" />
+                      </motion.div>
+                      <motion.div
+                        className="text-2xl font-mono font-bold syntax-function mb-1"
+                        initial={{ scale: 0 }}
+                        whileInView={{ scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.2 + index * 0.1, type: 'spring' }}
+                      >
+                        {stat.value}
+                      </motion.div>
+                      <div className="text-xs font-mono text-muted-foreground">{stat.label}</div>
+                    </div>
+                  </BorderGlow>
                 </motion.div>
               ))}
             </motion.div>

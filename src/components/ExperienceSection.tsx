@@ -1,5 +1,6 @@
 import { Building2, Calendar, CheckCircle2 } from 'lucide-react';
 import { motion } from 'framer-motion';
+import BorderGlow from './BorderGlow';
 
 const experiences = [
   {
@@ -8,6 +9,8 @@ const experiences = [
     location: 'Baguio City, Philippines',
     type: 'Freelance',
     period: '07/2025 – Present',
+    glowColor: '210 90 70',
+    glowColors: ['#38bdf8', '#818cf8', '#6366f1'],
     responsibilities: [
       'Developed and deployed web applications using Next.js and Tailwind CSS',
       'Leveraged AI tools to streamline development and improve code quality',
@@ -22,6 +25,8 @@ const experiences = [
     location: 'Makati City, Philippines',
     type: 'Full-time',
     period: '11/2024 – 07/2025',
+    glowColor: '150 80 70',
+    glowColors: ['#10b981', '#34d399', '#059669'],
     responsibilities: [
       'Developed and maintained business applications, SQL Server stored procedures, and user interface components',
       'Participated in software analysis, design, development, and implementation of system enhancements',
@@ -85,55 +90,58 @@ const ExperienceSection = () => {
                   className="absolute left-1.5 md:left-2.5 w-3 h-3 rounded-full bg-primary border-2 border-background z-10 top-6"
                 />
 
-                <motion.div
-                  className="vscode-panel rounded-sm p-5 md:p-6"
-                  whileHover={{
-                    y: -3,
-                    boxShadow: '0 10px 30px hsl(var(--primary) / 0.12)'
-                  }}
-                  transition={{ type: 'spring', stiffness: 300 }}
+                <BorderGlow
+                  borderRadius={12}
+                  glowRadius={30}
+                  glowIntensity={1.0}
+                  glowColor={exp.glowColor}
+                  colors={exp.glowColors}
+                  backgroundColor="hsl(var(--card))"
+                  className="w-full shadow-lg"
                 >
-                  {/* Header */}
-                  <div className="font-mono text-xs syntax-comment mb-3">
-                    {'{'} <span className="syntax-comment">// job[{index}]</span>
+                  <div className="p-5 md:p-6">
+                    {/* Header */}
+                    <div className="font-mono text-xs syntax-comment mb-3">
+                      {'{'} <span className="syntax-comment">// job[{index}]</span>
+                    </div>
+
+                    <div className="flex items-center gap-2 mb-2">
+                      <Calendar className="w-3.5 h-3.5 text-primary" />
+                      <span className="text-xs font-mono syntax-number">{exp.period}</span>
+                      <span className="px-2 py-0.5 rounded text-xs font-mono" style={{ background: 'hsl(var(--primary) / 0.1)', color: 'hsl(var(--syntax-string))' }}>
+                        {exp.type}
+                      </span>
+                    </div>
+
+                    <h3 className="text-lg font-mono font-bold syntax-function mb-1">{exp.title}</h3>
+
+                    <div className="flex items-center gap-2 text-muted-foreground mb-1">
+                      <Building2 className="w-3.5 h-3.5" />
+                      <span className="text-sm font-mono syntax-string">"{exp.company}"</span>
+                    </div>
+                    <div className="text-xs font-mono syntax-comment mb-4 pl-5">
+                      {`// ${exp.location}`}
+                    </div>
+
+                    <ul className="space-y-1.5">
+                      {exp.responsibilities.map((item, i) => (
+                        <motion.li
+                          key={i}
+                          initial={{ opacity: 0, x: -20 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: 0.1 * i }}
+                          className="flex items-start gap-2 text-muted-foreground text-sm font-mono"
+                        >
+                          <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
+                          <span>{item}</span>
+                        </motion.li>
+                      ))}
+                    </ul>
+
+                    <div className="font-mono text-xs syntax-comment mt-3">{'}'}</div>
                   </div>
-
-                  <div className="flex items-center gap-2 mb-2">
-                    <Calendar className="w-3.5 h-3.5 text-primary" />
-                    <span className="text-xs font-mono syntax-number">{exp.period}</span>
-                    <span className="px-2 py-0.5 rounded-sm text-xs font-mono" style={{ background: 'hsl(var(--primary) / 0.1)', color: 'hsl(var(--syntax-string))' }}>
-                      {exp.type}
-                    </span>
-                  </div>
-
-                  <h3 className="text-lg font-mono font-bold syntax-function mb-1">{exp.title}</h3>
-
-                  <div className="flex items-center gap-2 text-muted-foreground mb-1">
-                    <Building2 className="w-3.5 h-3.5" />
-                    <span className="text-sm font-mono syntax-string">"{exp.company}"</span>
-                  </div>
-                  <div className="text-xs font-mono syntax-comment mb-4 pl-5">
-                    {`// ${exp.location}`}
-                  </div>
-
-                  <ul className="space-y-1.5">
-                    {exp.responsibilities.map((item, i) => (
-                      <motion.li
-                        key={i}
-                        initial={{ opacity: 0, x: -20 }}
-                        whileInView={{ opacity: 1, x: 0 }}
-                        viewport={{ once: true }}
-                        transition={{ delay: 0.1 * i }}
-                        className="flex items-start gap-2 text-muted-foreground text-sm font-mono"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-primary mt-0.5 flex-shrink-0" />
-                        <span>{item}</span>
-                      </motion.li>
-                    ))}
-                  </ul>
-
-                  <div className="font-mono text-xs syntax-comment mt-3">{'}'}</div>
-                </motion.div>
+                </BorderGlow>
               </motion.div>
             ))}
           </div>

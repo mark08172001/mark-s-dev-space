@@ -1,8 +1,59 @@
-import { ArrowDown, Github, Linkedin, Mail } from 'lucide-react';
+import { useState, Suspense, lazy, Component } from 'react';
+import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
 import profilePhoto from '@/assets/profile-photo.jpg';
+import BorderGlow from './BorderGlow';
+
+// Lazy load the heavy 3D Lanyard component
+const Lanyard = lazy(() => import('./Lanyard'));
+
+// Error boundary to catch 3D rendering crashes without breaking the whole site
+class LanyardErrorBoundary extends Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false };
+  }
+
+  static getDerivedStateFromError() {
+    return { hasError: true };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.warn('Lanyard 3D failed to load:', error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return this.props.fallback || null;
+    }
+    return this.props.children;
+  }
+}
 
 const HeroSection = () => {
+  // Fallback profile image if 3D fails
+  const profileFallback = (
+    <div className="w-full h-full flex items-center justify-center p-6">
+      <motion.div
+        className="relative"
+        whileHover={{ scale: 1.05 }}
+        transition={{ type: 'spring', stiffness: 300 }}
+      >
+        <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl">
+          <img
+            src={profilePhoto}
+            alt="Mark TJ T. Permison"
+            className="w-full h-full object-cover"
+          />
+        </div>
+        <div className="absolute -bottom-2 -right-2 flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1 shadow-lg">
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+          <span className="font-mono text-[10px] text-foreground">Online</span>
+        </div>
+      </motion.div>
+    </div>
+  );
+
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       style={{ background: 'var(--gradient-hero)' }}
@@ -29,55 +80,65 @@ const HeroSection = () => {
       </div>
 
       <div className="container mx-auto px-4 md:px-6 relative z-10">
-        <div className="max-w-5xl mx-auto">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content - Code editor style */}
-            <div className="order-2 lg:order-1">
-              {/* Code block wrapper */}
-              <div className="vscode-panel rounded-sm overflow-hidden">
-                {/* Editor tab */}
-                <div className="flex items-center border-b border-border" style={{ background: 'hsl(var(--vscode-tab-inactive))' }}>
-                  <div className="vscode-tab active text-xs">developer.tsx</div>
-                </div>
+            <div className="order-2 lg:order-1 lg:col-span-7">
+              {/* Code block wrapper with BorderGlow */}
+              <BorderGlow
+                borderRadius={12}
+                glowRadius={30}
+                glowIntensity={1.0}
+                glowColor="210 90 70"
+                colors={['#38bdf8', '#818cf8', '#c084fc']}
+                backgroundColor="hsl(var(--card))"
+                className="w-full shadow-2xl"
+              >
+                <div className="w-full">
+                  {/* Editor tab */}
+                  <div className="flex items-center border-b border-border" style={{ background: 'hsl(var(--vscode-tab-inactive))' }}>
+                    <div className="vscode-tab active text-xs">developer.tsx</div>
+                  </div>
 
-                {/* Code content */}
-                <div className="p-4 md:p-6 font-mono text-sm space-y-1">
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="code-line">
-                    <span className="line-number">1</span>
-                    <span><span className="syntax-keyword">const</span> <span className="syntax-variable">developer</span> <span className="syntax-operator">=</span> {'{'}</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="code-line">
-                    <span className="line-number">2</span>
-                    <span className="ml-6"><span className="syntax-variable">name</span>: <span className="syntax-string">"Mark TJ T. Permison"</span>,</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="code-line">
-                    <span className="line-number">3</span>
-                    <span className="ml-6"><span className="syntax-variable">role</span>: <span className="syntax-string">"Full Stack Developer"</span>,</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="code-line">
-                    <span className="line-number">4</span>
-                    <span className="ml-6"><span className="syntax-variable">experience</span>: <span className="syntax-string">"9+ months"</span>,</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="code-line">
-                    <span className="line-number">5</span>
-                    <span className="ml-6"><span className="syntax-variable">status</span>: <span className="syntax-string">"Available for opportunities"</span>,</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="code-line">
-                    <span className="line-number">6</span>
-                    <span className="ml-6"><span className="syntax-variable">passion</span>: <span className="syntax-string">"Building elegant solutions"</span>,</span>
-                  </motion.div>
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="code-line">
-                    <span className="line-number">7</span>
-                    <span>{'}'};</span>
-                  </motion.div>
+                  {/* Code content */}
+                  <div className="p-4 md:p-6 font-mono text-sm space-y-1">
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.1 }} className="code-line">
+                      <span className="line-number">1</span>
+                      <span><span className="syntax-keyword">const</span> <span className="syntax-variable">developer</span> <span className="syntax-operator">=</span> {'{'}</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.2 }} className="code-line">
+                      <span className="line-number">2</span>
+                      <span className="ml-6"><span className="syntax-variable">name</span>: <span className="syntax-string">"Mark TJ T. Permison"</span>,</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="code-line">
+                      <span className="line-number">3</span>
+                      <span className="ml-6"><span className="syntax-variable">role</span>: <span className="syntax-string">"Full Stack Developer"</span>,</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="code-line">
+                      <span className="line-number">4</span>
+                      <span className="ml-6"><span className="syntax-variable">experience</span>: <span className="syntax-string">"9+ months"</span>,</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }} className="code-line">
+                      <span className="line-number">5</span>
+                      <span className="ml-6"><span className="syntax-variable">status</span>: <span className="syntax-string">"Available for opportunities"</span>,</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.6 }} className="code-line">
+                      <span className="line-number">6</span>
+                      <span className="ml-6"><span className="syntax-variable">passion</span>: <span className="syntax-string">"Building elegant solutions"</span>,</span>
+                    </motion.div>
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.7 }} className="code-line">
+                      <span className="line-number">7</span>
+                      <span>{'}'};</span>
+                    </motion.div>
 
-                  {/* Blinking cursor */}
-                  <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="code-line">
-                    <span className="line-number">8</span>
-                    <span className="w-2 h-4 bg-foreground animate-blink inline-block" />
-                  </motion.div>
+                    {/* Blinking cursor */}
+                    <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.8 }} className="code-line">
+                      <span className="line-number">8</span>
+                      <span className="w-2 h-4 bg-foreground animate-blink inline-block" />
+                    </motion.div>
+                  </div>
                 </div>
-              </div>
+              </BorderGlow>
 
               {/* Action buttons */}
               <motion.div
@@ -88,7 +149,7 @@ const HeroSection = () => {
               >
                 <motion.a
                   href="#projects"
-                  className="px-6 py-2.5 bg-primary text-primary-foreground rounded-sm font-mono text-sm formal-button hover:bg-primary/90 transition-all text-center"
+                  className="px-6 py-2.5 bg-primary text-primary-foreground rounded-sm font-mono text-sm formal-button hover:bg-primary/90 transition-all text-center shadow-lg hover:shadow-primary/25"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -96,7 +157,7 @@ const HeroSection = () => {
                 </motion.a>
                 <motion.a
                   href="#contact"
-                  className="px-6 py-2.5 bg-card border border-border text-foreground rounded-sm font-mono text-sm hover:bg-muted transition-all text-center"
+                  className="px-6 py-2.5 bg-card border border-border text-foreground rounded-sm font-mono text-sm hover:bg-muted transition-all text-center shadow-md"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
@@ -134,42 +195,58 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* Profile Photo */}
+            {/* 3D Interactive Lanyard Profile Badge */}
             <motion.div
-              initial={{ opacity: 0, scale: 0.8 }}
+              initial={{ opacity: 0, scale: 0.85 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex justify-center order-1 lg:order-2"
+              className="flex flex-col items-center justify-center order-1 lg:order-2 lg:col-span-5 relative"
             >
-              <div className="relative">
-                {/* Terminal-style frame */}
-                <div className="vscode-panel rounded-sm overflow-hidden">
-                  <div className="flex items-center gap-2 px-3 py-1.5 border-b border-border" style={{ background: 'hsl(var(--vscode-tab-inactive))' }}>
-                    <div className="flex gap-1.5">
-                      <span className="w-2.5 h-2.5 rounded-full bg-destructive/80" />
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ background: 'hsl(var(--syntax-function))' }} />
-                      <span className="w-2.5 h-2.5 rounded-full" style={{ background: 'hsl(var(--syntax-string))' }} />
+              <div className="w-full max-w-[340px] md:max-w-[400px] lg:max-w-[420px] h-[460px] md:h-[520px] relative flex flex-col items-center justify-center">
+                <BorderGlow
+                  borderRadius={18}
+                  glowRadius={35}
+                  glowIntensity={1.0}
+                  glowColor="210 90 70"
+                  colors={['#38bdf8', '#818cf8', '#c084fc']}
+                  backgroundColor="hsl(var(--card) / 0.7)"
+                  className="w-full h-full shadow-2xl backdrop-blur-md relative overflow-hidden"
+                >
+                  <div className="w-full h-full flex flex-col relative">
+                    {/* Badge top status bar */}
+                    <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
+                      <div className="flex items-center gap-2">
+                        <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                        <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                      </div>
+                      <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
+                        <Sparkles className="w-2.5 h-2.5" /> 3D Physics
+                      </span>
                     </div>
-                    <span className="font-mono text-xs text-muted-foreground">profile.jpg</span>
+
+                    {/* Interactive Lanyard 3D Canvas */}
+                    <div className="flex-1 w-full h-full relative cursor-grab active:cursor-grabbing">
+                      <LanyardErrorBoundary fallback={profileFallback}>
+                        <Suspense fallback={profileFallback}>
+                          <Lanyard
+                            position={[0, 0, 20]}
+                            gravity={[0, -40, 0]}
+                            frontImage={profilePhoto}
+                            backImage={profilePhoto}
+                            imageFit="cover"
+                          />
+                        </Suspense>
+                      </LanyardErrorBoundary>
+                    </div>
+
+                    {/* Badge bottom hint */}
+                    <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                      <span className="font-mono text-[11px] text-muted-foreground">
+                        ✦ Drag & swing 3D ID badge
+                      </span>
+                    </div>
                   </div>
-                  <motion.div
-                    className="w-64 h-64 md:w-72 md:h-72 lg:w-80 lg:h-80"
-                    animate={{
-                      boxShadow: [
-                        '0 0 20px hsl(var(--primary) / 0.1)',
-                        '0 0 40px hsl(var(--primary) / 0.2)',
-                        '0 0 20px hsl(var(--primary) / 0.1)',
-                      ]
-                    }}
-                    transition={{ duration: 3, repeat: Infinity }}
-                  >
-                    <img
-                      src={profilePhoto}
-                      alt="Mark TJ T. Permison"
-                      className="w-full h-full object-cover object-top"
-                    />
-                  </motion.div>
-                </div>
+                </BorderGlow>
               </div>
             </motion.div>
           </div>
