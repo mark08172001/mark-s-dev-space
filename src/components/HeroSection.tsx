@@ -14,8 +14,8 @@ class LanyardErrorBoundary extends Component {
     this.state = { hasError: false };
   }
 
-  static getDerivedStateFromError() {
-    return { hasError: true };
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error };
   }
 
   componentDidCatch(error, errorInfo) {
@@ -24,7 +24,15 @@ class LanyardErrorBoundary extends Component {
 
   render() {
     if (this.state.hasError) {
-      return this.props.fallback || null;
+      return (
+        <div className="w-full h-full flex flex-col items-center justify-center p-6 text-red-500">
+          <p className="font-bold">3D Rendering Error</p>
+          <pre className="text-xs max-w-full overflow-auto mt-2 p-2 bg-black/50 rounded">
+            {this.state.error?.message}
+          </pre>
+          <div className="mt-4">{this.props.fallback}</div>
+        </div>
+      );
     }
     return this.props.children;
   }
