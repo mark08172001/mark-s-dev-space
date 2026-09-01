@@ -251,9 +251,10 @@ const HeroSection = () => {
                       </BorderGlow>
                     </Lanyard>
                   </Suspense>
-                </LanyardErrorBoundary>
-              </div>
-            </motion.div>
+                </LanyardErrorBoundary>,
+                document.body
+              )}
+            </div>
           </div>
         </div>
 
