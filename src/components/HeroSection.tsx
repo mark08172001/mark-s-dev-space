@@ -9,8 +9,8 @@ import BorderGlow from './BorderGlow';
 const Lanyard = lazy(() => import('./Lanyard'));
 
 // Error boundary to catch 3D rendering crashes without breaking the whole site
-class LanyardErrorBoundary extends Component {
-  constructor(props) {
+class LanyardErrorBoundary extends Component<{ fallback: React.ReactNode; children: React.ReactNode }, { hasError: boolean; error?: Error }> {
+  constructor(props: { fallback: React.ReactNode; children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
