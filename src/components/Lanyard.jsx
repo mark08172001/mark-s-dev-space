@@ -172,7 +172,38 @@ function Band({
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
   const [dragged, drag] = useState(false);
-  const [hovered, hover] = useState(false);
+  const mouseRef = useRef(new THREE.Vector2());
+  const camera = useThree((s) => s.camera);
+
+  const updateMouse = (e) => {
+    mouseRef.current.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+  };
+
+  const toWorld = () => {
+    const v = new THREE.Vector3(mouseRef.current.x, mouseRef.current.y, 0.5).unproject(camera);
+    const d = v.clone().sub(camera.position).normalize();
+    v.add(d.multiplyScalar(camera.position.length()));
+    return v;
+  };
+
+  const handlePointerDown = (e) => {
+    if (!card.current) return;
+    e.preventDefault();
+    e.target.setPointerCapture?.(e.pointerId);
+    updateMouse(e);
+    const w = toWorld();
+    const t = card.current.translation();
+    drag(new THREE.Vector3(w.x - t.x, w.y - t.y, w.z - t.z));
+  };
+
+  const handlePointerMove = (e) => {
+    if (dragged) updateMouse(e);
+  };
+
+  const handlePointerUp = (e) => {
+    e.target.releasePointerCapture?.(e.pointerId);
+    drag(false);
+  };
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
