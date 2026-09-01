@@ -262,17 +262,18 @@ function Band({
           <group
             scale={2.25}
             position={[0, -1.2, -0.05]}
-            onPointerOver={() => hover(true)}
-            onPointerOut={() => hover(false)}
-            onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
-            onPointerDown={e => (
-              e.target.setPointerCapture(e.pointerId),
-              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
-            )}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[0, 0, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'none' }}>
-                {children}
+              <Html transform distanceFactor={1.2} position={[0, 0.45, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+                <div
+                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto' }}
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
+                >
+                  {children}
+                </div>
               </Html>
             )}
             <mesh geometry={nodes.card.geometry} visible={!children}>
