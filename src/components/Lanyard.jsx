@@ -1,7 +1,7 @@
 /* eslint-disable react/no-unknown-property */
 'use client';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import { Canvas, extend, useFrame } from '@react-three/fiber';
+import { Canvas, extend, useFrame, useThree } from '@react-three/fiber';
 import { useGLTF, useTexture, Environment, Lightformer, Html } from '@react-three/drei';
 import { BallCollider, CuboidCollider, Physics, RigidBody, useRopeJoint, useSphericalJoint } from '@react-three/rapier';
 import { MeshLineGeometry, MeshLineMaterial } from 'meshline';
@@ -19,6 +19,12 @@ const BLANK_PIXEL =
 
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
+
+const AnchoredGroup = ({ children }) => {
+  const viewport = useThree((s) => s.viewport);
+  const x = Math.max(0, viewport.width / 2 - 1.7);
+  return <group position={[x, 4, 0]}>{children}</group>;
+};
 
 export default function Lanyard({
   position = [0, 0, 30],
@@ -172,7 +178,38 @@ function Band({
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
   const [dragged, drag] = useState(false);
-  const [hovered, hover] = useState(false);
+  const mouseRef = useRef(new THREE.Vector2());
+  const camera = useThree((s) => s.camera);
+
+  const updateMouse = (e) => {
+    mouseRef.current.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+  };
+
+  const toWorld = () => {
+    const v = new THREE.Vector3(mouseRef.current.x, mouseRef.current.y, 0.5).unproject(camera);
+    const d = v.clone().sub(camera.position).normalize();
+    v.add(d.multiplyScalar(camera.position.length()));
+    return v;
+  };
+
+  const handlePointerDown = (e) => {
+    if (!card.current) return;
+    e.preventDefault();
+    e.target.setPointerCapture?.(e.pointerId);
+    updateMouse(e);
+    const w = toWorld();
+    const t = card.current.translation();
+    drag(new THREE.Vector3(w.x - t.x, w.y - t.y, w.z - t.z));
+  };
+
+  const handlePointerMove = (e) => {
+    if (dragged) updateMouse(e);
+  };
+
+  const handlePointerUp = (e) => {
+    e.target.releasePointerCapture?.(e.pointerId);
+    drag(false);
+  };
 
   useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
   useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
@@ -182,16 +219,9 @@ function Band({
     [0, 1.5, 0]
   ]);
 
-  useEffect(() => {
-    if (hovered) {
-      document.body.style.cursor = dragged ? 'grabbing' : 'grab';
-      return () => void (document.body.style.cursor = 'auto');
-    }
-  }, [hovered, dragged]);
-
   useFrame((state, delta) => {
     if (dragged) {
-      vec.set(state.pointer.x, state.pointer.y, 0.5).unproject(state.camera);
+      vec.set(mouseRef.current.x, mouseRef.current.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
@@ -222,7 +252,7 @@ function Band({
 
   return (
     <>
-      <group position={[0, 4, 0]}>
+      <AnchoredGroup>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
@@ -238,17 +268,18 @@ function Band({
           <group
             scale={2.25}
             position={[0, -1.2, -0.05]}
-            onPointerOver={() => hover(true)}
-            onPointerOut={() => hover(false)}
-            onPointerUp={e => (e.target.releasePointerCapture(e.pointerId), drag(false))}
-            onPointerDown={e => (
-              e.target.setPointerCapture(e.pointerId),
-              drag(new THREE.Vector3().copy(e.point).sub(vec.copy(card.current.translation())))
-            )}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[0, 0, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'none' }}>
-                {children}
+              <Html transform distanceFactor={1.2} position={[0, 0.45, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+                <div
+                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(0.6)', transformOrigin: 'top center' }}
+                  onPointerDown={handlePointerDown}
+                  onPointerMove={handlePointerMove}
+                  onPointerUp={handlePointerUp}
+                  onPointerCancel={handlePointerUp}
+                >
+                  {children}
+                </div>
               </Html>
             )}
             <mesh geometry={nodes.card.geometry} visible={!children}>
@@ -265,7 +296,7 @@ function Band({
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>
         </RigidBody>
-      </group>
+      </AnchoredGroup>
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial

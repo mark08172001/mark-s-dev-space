@@ -1,6 +1,7 @@
 import { useState, Suspense, lazy, Component } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import profilePhoto from '@/assets/profile-photo.jpg';
 import BorderGlow from './BorderGlow';
 
@@ -8,8 +9,8 @@ import BorderGlow from './BorderGlow';
 const Lanyard = lazy(() => import('./Lanyard'));
 
 // Error boundary to catch 3D rendering crashes without breaking the whole site
-class LanyardErrorBoundary extends Component {
-  constructor(props) {
+class LanyardErrorBoundary extends Component<{ fallback: React.ReactNode; children: React.ReactNode }, { hasError: boolean; error?: Error }> {
+  constructor(props: { fallback: React.ReactNode; children: React.ReactNode }) {
     super(props);
     this.state = { hasError: false };
   }
@@ -39,29 +40,6 @@ class LanyardErrorBoundary extends Component {
 }
 
 const HeroSection = () => {
-  // Fallback profile image if 3D fails
-  const profileFallback = (
-    <div className="w-full h-full flex items-center justify-center p-6">
-      <motion.div
-        className="relative"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl">
-          <img
-            src={profilePhoto}
-            alt="Mark TJ T. Permison"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute -bottom-2 -right-2 flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1 shadow-lg">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-mono text-[10px] text-foreground">Online</span>
-        </div>
-      </motion.div>
-    </div>
-  );
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       style={{ background: 'var(--gradient-hero)' }}
@@ -203,16 +181,11 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* 3D Interactive Lanyard Profile Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-center justify-start pt-10 order-1 lg:order-2 lg:col-span-5 relative h-[600px] md:h-[700px] w-full"
-            >
-              <div className="absolute inset-0 top-[-100px] left-[-50px] right-[-50px] bottom-[-100px] z-10">
-                <LanyardErrorBoundary fallback={profileFallback}>
-                  <Suspense fallback={profileFallback}>
+            {/* 3D Interactive Lanyard Profile Badge - floats over the whole site */}
+            <div className="order-1 lg:order-2 lg:col-span-5 relative h-[300px] lg:h-auto w-full">
+              {createPortal(
+                <LanyardErrorBoundary fallback={null}>
+                  <Suspense fallback={null}>
                     <Lanyard
                       position={[0, 0, 20]}
                       gravity={[0, -40, 0]}
@@ -256,9 +229,10 @@ const HeroSection = () => {
                       </BorderGlow>
                     </Lanyard>
                   </Suspense>
-                </LanyardErrorBoundary>
-              </div>
-            </motion.div>
+                </LanyardErrorBoundary>,
+                document.body
+              )}
+            </div>
           </div>
         </div>
 
