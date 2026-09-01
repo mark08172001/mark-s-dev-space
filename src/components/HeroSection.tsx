@@ -203,16 +203,11 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* 3D Interactive Lanyard Profile Badge */}
-            <motion.div
-              initial={{ opacity: 0, scale: 0.85 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="flex flex-col items-center justify-start pt-10 order-1 lg:order-2 lg:col-span-5 relative h-[600px] md:h-[700px] w-full"
-            >
-              <div className="absolute inset-0 top-[-100px] left-[-50px] right-[-50px] bottom-[-100px] z-10">
-                <LanyardErrorBoundary fallback={profileFallback}>
-                  <Suspense fallback={profileFallback}>
+            {/* 3D Interactive Lanyard Profile Badge - floats over the whole site */}
+            <div className="order-1 lg:order-2 lg:col-span-5 relative h-[300px] lg:h-auto w-full">
+              {createPortal(
+                <LanyardErrorBoundary fallback={null}>
+                  <Suspense fallback={null}>
                     <Lanyard
                       position={[0, 0, 20]}
                       gravity={[0, -40, 0]}
