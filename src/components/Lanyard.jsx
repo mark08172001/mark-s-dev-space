@@ -296,7 +296,7 @@ function Band({
             <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
           </group>
         </RigidBody>
-      </group>
+      </AnchoredGroup>
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial
