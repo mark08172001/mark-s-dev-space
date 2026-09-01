@@ -20,6 +20,12 @@ const BLANK_PIXEL =
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
+const AnchoredGroup = ({ children }) => {
+  const viewport = useThree((s) => s.viewport);
+  const x = Math.max(0, viewport.width / 2 - 1.7);
+  return <group position={[x, 4, 0]}>{children}</group>;
+};
+
 export default function Lanyard({
   position = [0, 0, 30],
   gravity = [0, -40, 0],
@@ -246,7 +252,7 @@ function Band({
 
   return (
     <>
-      <group position={[2.6, 4, 0]}>
+      <AnchoredGroup>
         <RigidBody ref={fixed} {...segmentProps} type="fixed" />
         <RigidBody position={[0.5, 0, 0]} ref={j1} {...segmentProps}>
           <BallCollider args={[0.1]} />
