@@ -1,6 +1,7 @@
 import { useState, Suspense, lazy, Component } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
+import { createPortal } from 'react-dom';
 import profilePhoto from '@/assets/profile-photo.jpg';
 import BorderGlow from './BorderGlow';
 
@@ -39,29 +40,6 @@ class LanyardErrorBoundary extends Component {
 }
 
 const HeroSection = () => {
-  // Fallback profile image if 3D fails
-  const profileFallback = (
-    <div className="w-full h-full flex items-center justify-center p-6">
-      <motion.div
-        className="relative"
-        whileHover={{ scale: 1.05 }}
-        transition={{ type: 'spring', stiffness: 300 }}
-      >
-        <div className="w-48 h-48 md:w-56 md:h-56 rounded-2xl overflow-hidden border-2 border-primary/30 shadow-xl">
-          <img
-            src={profilePhoto}
-            alt="Mark TJ T. Permison"
-            className="w-full h-full object-cover"
-          />
-        </div>
-        <div className="absolute -bottom-2 -right-2 flex items-center gap-1.5 bg-card border border-border rounded-full px-3 py-1 shadow-lg">
-          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-          <span className="font-mono text-[10px] text-foreground">Online</span>
-        </div>
-      </motion.div>
-    </div>
-  );
-
   return (
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
       style={{ background: 'var(--gradient-hero)' }}
