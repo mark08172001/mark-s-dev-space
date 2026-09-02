@@ -180,6 +180,12 @@ function Band({
   const [dragged, drag] = useState(false);
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
+  const viewport = useThree((s) => s.viewport);
+  // Keep the badge inside the canvas' right area — never let it cross the left edge
+  const minX = -viewport.width / 2 + 1.4;
+  const maxX = viewport.width / 2 - 1.4;
+  const maxY = 3.2;
+  const minY = -viewport.height / 2 + 1.8;
 
   const updateMouse = (e) => {
     mouseRef.current.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
@@ -224,8 +230,10 @@ function Band({
       vec.set(mouseRef.current.x, mouseRef.current.y, 0.5).unproject(state.camera);
       dir.copy(vec).sub(state.camera.position).normalize();
       vec.add(dir.multiplyScalar(state.camera.position.length()));
+      const nx = Math.min(Math.max(vec.x - dragged.x, minX), maxX);
+      const ny = Math.min(Math.max(vec.y - dragged.y, minY), maxY);
       [card, j1, j2, j3, fixed].forEach(ref => ref.current?.wakeUp());
-      card.current?.setNextKinematicTranslation({ x: vec.x - dragged.x, y: vec.y - dragged.y, z: vec.z - dragged.z });
+      card.current?.setNextKinematicTranslation({ x: nx, y: ny, z: vec.z - dragged.z });
     }
     if (fixed.current) {
       [j1, j2].forEach(ref => {
@@ -272,7 +280,7 @@ function Band({
             {children && (
               <Html transform distanceFactor={1.2} position={[0.11, 0.48, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
-                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(1)', transformOrigin: 'top center' }}
+                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(1.2)', transformOrigin: 'top center' }}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
