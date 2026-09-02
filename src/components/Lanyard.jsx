@@ -270,9 +270,9 @@ function Band({
             position={[0, -1.2, -0.05]}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[0, 0.45, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+              <Html transform distanceFactor={1.2} position={[0.11, 0.48, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
-                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(0.8)', transformOrigin: 'top center' }}
+                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(1)', transformOrigin: 'top center' }}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
@@ -292,20 +292,17 @@ function Band({
                 metalness={0.8}
               />
             </mesh>
-            <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} />
-            <mesh geometry={nodes.clamp.geometry} material={materials.metal} />
+            <mesh geometry={nodes.clip.geometry} material={materials.metal} material-roughness={0.3} visible={!children} />
+            <mesh geometry={nodes.clamp.geometry} material={materials.metal} visible={!children} />
           </group>
         </RigidBody>
       </AnchoredGroup>
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial
-          color="white"
+          color="#e2e8f0"
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          useMap
-          map={texture}
-          repeat={[-4, 1]}
           lineWidth={lanyardWidth}
         />
       </mesh>
