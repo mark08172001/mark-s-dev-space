@@ -181,58 +181,78 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* 3D Interactive Lanyard Profile Badge - floats over the whole site */}
-            <div className="order-1 lg:order-2 lg:col-span-5 relative h-[300px] lg:h-auto w-full">
-              {createPortal(
-                <LanyardErrorBoundary fallback={null}>
-                  <Suspense fallback={null}>
-                    <Lanyard
-                      position={[0, 0, 20]}
-                      gravity={[0, -40, 0]}
+            {/* 3D Interactive Lanyard Profile Badge - lives inside the hero, scrolls with it */}
+            <div className="order-1 lg:order-2 lg:col-span-5 relative h-[420px] md:h-[520px] lg:h-[620px] w-full">
+              <LanyardErrorBoundary fallback={null}>
+                <Suspense fallback={null}>
+                  <Lanyard
+                    position={[0, 0, 20]}
+                    gravity={[0, -40, 0]}
+                  >
+                    <BorderGlow
+                      borderRadius={18}
+                      glowRadius={35}
+                      glowIntensity={1.0}
+                      glowColor="210 90 70"
+                      colors={['#38bdf8', '#818cf8', '#c084fc']}
+                      backgroundColor="hsl(var(--card) / 0.7)"
+                      className="w-[340px] md:w-[400px] h-[480px] md:h-[540px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
                     >
-                      <BorderGlow
-                        borderRadius={18}
-                        glowRadius={35}
-                        glowIntensity={1.0}
-                        glowColor="210 90 70"
-                        colors={['#38bdf8', '#818cf8', '#c084fc']}
-                        backgroundColor="hsl(var(--card) / 0.7)"
-                        className="w-[340px] md:w-[400px] lg:w-[420px] h-[460px] md:h-[520px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
-                      >
-                        {/* Badge top status bar */}
-                        <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
-                          <div className="flex items-center gap-2">
-                            <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                            <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                      {/* Badge top status bar */}
+                      <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
+                        <div className="flex items-center gap-2">
+                          <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
+                          <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                        </div>
+                        <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
+                          <Sparkles className="w-2.5 h-2.5" /> 3D Physics
+                        </span>
+                      </div>
+
+                      {/* Profile Image */}
+                      <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-3 p-5">
+                        <img
+                          src={profilePhoto}
+                          alt="Mark TJ T. Permison"
+                          className="w-40 h-40 md:w-44 md:h-44 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
+                          style={{ pointerEvents: 'none' }}
+                        />
+                        <div className="text-center">
+                          <p className="font-mono text-sm text-foreground font-semibold">Mark TJ T. Permison</p>
+                          <p className="font-mono text-[11px] text-primary mt-0.5">
+                            Full Stack Developer | QA Tester
+                          </p>
+                        </div>
+
+                        {/* Barcode */}
+                        <div className="w-full px-4 mt-1">
+                          <div className="flex items-end justify-center gap-[2px] h-10 bg-white rounded-sm px-3 py-1.5">
+                            {barcodeBars.map((w, i) => (
+                              <span
+                                key={i}
+                                className="h-full bg-black"
+                                style={{ width: `${w}px` }}
+                              />
+                            ))}
                           </div>
-                          <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
-                            <Sparkles className="w-2.5 h-2.5" /> 3D Physics
-                          </span>
+                          <p className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground text-center mt-1">
+                            MTJP-2026-0917
+                          </p>
                         </div>
+                      </div>
 
-                        {/* Profile Image (previously in Lanyard props, now rendered inside HTML card) */}
-                        <div className="flex-1 w-full h-full relative flex items-center justify-center p-6">
-                           <img
-                             src={profilePhoto}
-                             alt="Mark TJ T. Permison"
-                             className="w-48 h-48 md:w-56 md:h-56 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
-                             style={{ pointerEvents: 'none' }}
-                           />
-                        </div>
-
-                        {/* Badge bottom hint */}
-                        <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
-                          <span className="font-mono text-[11px] text-muted-foreground">
-                            ✦ Drag & swing 3D ID badge
-                          </span>
-                        </div>
-                      </BorderGlow>
-                    </Lanyard>
-                  </Suspense>
-                </LanyardErrorBoundary>,
-                document.body
-              )}
+                      {/* Badge bottom hint */}
+                      <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                        <span className="font-mono text-[11px] text-muted-foreground">
+                          ✦ Drag &amp; swing 3D ID badge
+                        </span>
+                      </div>
+                    </BorderGlow>
+                  </Lanyard>
+                </Suspense>
+              </LanyardErrorBoundary>
             </div>
+
           </div>
         </div>
 
