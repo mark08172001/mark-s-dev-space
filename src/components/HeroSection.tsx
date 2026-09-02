@@ -1,12 +1,15 @@
-import { useState, Suspense, lazy, Component } from 'react';
+import { Suspense, lazy, Component } from 'react';
 import { ArrowDown, Github, Linkedin, Mail, Sparkles } from 'lucide-react';
 import { motion } from 'framer-motion';
-import { createPortal } from 'react-dom';
 import profilePhoto from '@/assets/profile-photo.jpg';
 import BorderGlow from './BorderGlow';
 
+// Deterministic barcode bar widths
+const barcodeBars = [1, 3, 1, 2, 4, 1, 1, 3, 2, 1, 4, 2, 1, 1, 3, 1, 2, 2, 4, 1, 3, 1, 1, 2, 3, 1, 4, 1, 2, 1, 1, 3, 2, 4, 1, 2];
+
 // Lazy load the heavy 3D Lanyard component
 const Lanyard = lazy(() => import('./Lanyard'));
+
 
 // Error boundary to catch 3D rendering crashes without breaking the whole site
 class LanyardErrorBoundary extends Component<{ fallback: React.ReactNode; children: React.ReactNode }, { hasError: boolean; error?: Error }> {
@@ -98,7 +101,7 @@ const HeroSection = () => {
                     </motion.div>
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.3 }} className="code-line">
                       <span className="line-number">3</span>
-                      <span className="ml-6"><span className="syntax-variable">role</span>: <span className="syntax-string">"Full Stack Developer"</span>,</span>
+                      <span className="ml-6"><span className="syntax-variable">role</span>: <span className="syntax-string">"Full Stack Developer | QA Tester"</span>,</span>
                     </motion.div>
                     <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.4 }} className="code-line">
                       <span className="line-number">4</span>
