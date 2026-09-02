@@ -300,12 +300,9 @@ function Band({
       <mesh ref={band}>
         <meshLineGeometry />
         <meshLineMaterial
-          color="white"
+          color="#e2e8f0"
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          useMap
-          map={texture}
-          repeat={[-4, 1]}
           lineWidth={lanyardWidth}
         />
       </mesh>
