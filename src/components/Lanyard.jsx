@@ -270,7 +270,7 @@ function Band({
             position={[0, -1.2, -0.05]}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[0, 0.62, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+              <Html transform distanceFactor={1.2} position={[0.11, 0.48, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
                   style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(1)', transformOrigin: 'top center' }}
                   onPointerDown={handlePointerDown}
