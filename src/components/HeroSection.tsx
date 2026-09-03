@@ -184,8 +184,8 @@ const HeroSection = () => {
               </motion.div>
             </div>
 
-            {/* 3D Interactive Lanyard Profile Badge - lives inside the hero, scrolls with it */}
-            <div className="order-1 lg:order-2 lg:col-span-5 relative h-[420px] md:h-[520px] lg:h-[620px] w-full">
+            {/* 3D Interactive Lanyard Profile Badge - lives inside the hero, scrolls with it; on desktop it overlays the whole hero so the badge can roam the right side */}
+            <div className="order-1 lg:order-2 relative h-[420px] md:h-[520px] w-full lg:absolute lg:inset-0 lg:h-auto lg:pointer-events-none lg:z-20">
               <LanyardErrorBoundary fallback={null}>
                 <Suspense fallback={null}>
                   <Lanyard

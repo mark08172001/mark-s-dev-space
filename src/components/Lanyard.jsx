@@ -180,9 +180,10 @@ function Band({
   const [dragged, drag] = useState(false);
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
+  const gl = useThree((s) => s.gl);
   const viewport = useThree((s) => s.viewport);
-  // Keep the badge inside the canvas' right area — never let it cross the left edge
-  const minX = -viewport.width / 2 + 1.4;
+  // Keep the badge on the right side of the page — never let it cross the middle
+  const minX = 0;
   const maxX = viewport.width / 2 - 1.4;
   const maxY = 3.2;
   const minY = -viewport.height / 2 + 1.8;
