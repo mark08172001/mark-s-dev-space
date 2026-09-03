@@ -22,8 +22,8 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
 const AnchoredGroup = ({ children }) => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(0, viewport.width / 2 - 1.7);
-  return <group position={[x, 4, 0]}>{children}</group>;
+  const x = Math.max(0, viewport.width / 2 - 1.9);
+  return <group position={[x, 6, 0]}>{children}</group>;
 };
 
 export default function Lanyard({
@@ -180,15 +180,20 @@ function Band({
   const [dragged, drag] = useState(false);
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
+  const gl = useThree((s) => s.gl);
   const viewport = useThree((s) => s.viewport);
-  // Keep the badge inside the canvas' right area — never let it cross the left edge
-  const minX = -viewport.width / 2 + 1.4;
+  // Keep the badge on the right side of the page — never let it cross the middle
+  const minX = 1.6;
   const maxX = viewport.width / 2 - 1.4;
   const maxY = 3.2;
   const minY = -viewport.height / 2 + 1.8;
 
   const updateMouse = (e) => {
-    mouseRef.current.set((e.clientX / window.innerWidth) * 2 - 1, -(e.clientY / window.innerHeight) * 2 + 1);
+    const rect = gl.domElement.getBoundingClientRect();
+    mouseRef.current.set(
+      ((e.clientX - rect.left) / rect.width) * 2 - 1,
+      -((e.clientY - rect.top) / rect.height) * 2 + 1
+    );
   };
 
   const toWorld = () => {
@@ -217,9 +222,9 @@ function Band({
     drag(false);
   };
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1]);
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.6]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.6]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.6]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
     [0, 1.5, 0]
