@@ -22,8 +22,8 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
 const AnchoredGroup = ({ children }) => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(0, viewport.width / 2 - 1.7);
-  return <group position={[x, 4, 0]}>{children}</group>;
+  const x = Math.max(0, viewport.width / 2 - 3.1);
+  return <group position={[x, 6, 0]}>{children}</group>;
 };
 
 export default function Lanyard({
