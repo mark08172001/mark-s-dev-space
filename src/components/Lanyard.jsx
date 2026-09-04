@@ -222,9 +222,9 @@ function Band({
     drag(false);
   };
 
-  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.6]);
-  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.6]);
-  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.6]);
+  useRopeJoint(fixed, j1, [[0, 0, 0], [0, 0, 0], 1.3]);
+  useRopeJoint(j1, j2, [[0, 0, 0], [0, 0, 0], 1.3]);
+  useRopeJoint(j2, j3, [[0, 0, 0], [0, 0, 0], 1.3]);
   useSphericalJoint(j3, card, [
     [0, 0, 0],
     [0, 1.5, 0]
