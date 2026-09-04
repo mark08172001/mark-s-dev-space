@@ -22,7 +22,7 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
 const AnchoredGroup = ({ children }) => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(1.2, viewport.width / 2 - 0.9);
+  const x = Math.max(0.4, viewport.width / 2 - 1.4);
   return <group position={[x, 6, 0]}>{children}</group>;
 };
 
@@ -183,8 +183,8 @@ function Band({
   const gl = useThree((s) => s.gl);
   const viewport = useThree((s) => s.viewport);
   // Keep the badge on the right side of the page — never let it cross the middle
-  const minX = 1.2;
-  const maxX = viewport.width / 2 - 0.4;
+  const minX = 0.3;
+  const maxX = Math.max(minX + 0.1, viewport.width / 2 - 1.2);
   const maxY = 3.2;
   const minY = -viewport.height / 2 + 1.8;
 
@@ -283,7 +283,7 @@ function Band({
             position={[0, -1.2, -0.05]}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[0.11, 0.48, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+              <Html transform distanceFactor={1.2} position={[0, 0.58, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
                   style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', display: 'inline-block' }}
                   onPointerDown={handlePointerDown}
@@ -310,13 +310,13 @@ function Band({
           </group>
         </RigidBody>
       </AnchoredGroup>
-      <mesh ref={band}>
+      <mesh ref={band} frustumCulled={false}>
         <meshLineGeometry />
         <meshLineMaterial
           color="#e2e8f0"
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          lineWidth={lanyardWidth}
+          lineWidth={Math.max(2.5, lanyardWidth)}
         />
       </mesh>
     </>
