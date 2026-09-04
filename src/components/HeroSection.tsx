@@ -206,7 +206,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
-                className="flex flex-col sm:flex-row gap-3 mt-6"
+                className="flex flex-col sm:flex-row gap-3 mt-6 relative z-30 pointer-events-auto"
               >
                 <motion.a
                   href="#projects"
