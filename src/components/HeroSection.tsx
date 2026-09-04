@@ -112,8 +112,8 @@ const HeroSection = () => {
                   </div>
 
                   {/* Barcode */}
-                  <div className="w-full px-4 mt-1">
-                    <div className="flex items-end justify-center gap-[2px] h-10 bg-white rounded-sm px-3 py-1.5">
+                  <div className="w-full px-2 mt-1">
+                    <div className="flex items-end justify-center gap-[2px] h-8 bg-white rounded-sm px-2 py-1">
                       {barcodeBars.map((w, i) => (
                         <span
                           key={i}
@@ -122,7 +122,7 @@ const HeroSection = () => {
                         />
                       ))}
                     </div>
-                    <p className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground text-center mt-1">
+                    <p className="font-mono text-[9px] tracking-[0.25em] text-muted-foreground text-center mt-1">
                       MTJP-2026-0917
                     </p>
                   </div>
