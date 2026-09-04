@@ -83,25 +83,25 @@ const HeroSection = () => {
                 glowColor="210 90 70"
                 colors={['#38bdf8', '#818cf8', '#c084fc']}
                 backgroundColor="hsl(var(--card) / 0.7)"
-                className="w-[340px] md:w-[400px] h-[480px] md:h-[540px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
+                className="w-[260px] md:w-[300px] h-[360px] md:h-[400px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
               >
                 {/* Badge top status bar */}
-                <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
+                <div className="flex items-center justify-between px-3 py-1.5 border-b border-border/80 bg-muted/40 z-10 shrink-0">
                   <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-mono text-[10px] text-foreground font-semibold">Mark_TJ.badge</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
-                    <Sparkles className="w-2.5 h-2.5" /> 3D Physics
+                  <span className="inline-flex items-center gap-1 font-mono text-[9px] text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
+                    <Sparkles className="w-2 h-2" /> 3D Physics
                   </span>
                 </div>
 
                 {/* Profile Image */}
-                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-3 p-5">
+                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-2 p-4">
                   <img
                     src={profilePhoto}
                     alt="Mark TJ T. Permison"
-                    className="w-40 h-40 md:w-44 md:h-44 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
+                    className="w-28 h-28 md:w-32 md:h-32 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
                     style={{ pointerEvents: 'none' }}
                   />
                   <div className="text-center">

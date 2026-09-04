@@ -22,7 +22,7 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
 const AnchoredGroup = ({ children }) => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(0, viewport.width / 2 - 1.9);
+  const x = Math.max(0.8, viewport.width / 2 - 1.3);
   return <group position={[x, 6, 0]}>{children}</group>;
 };
 
@@ -183,8 +183,8 @@ function Band({
   const gl = useThree((s) => s.gl);
   const viewport = useThree((s) => s.viewport);
   // Keep the badge on the right side of the page — never let it cross the middle
-  const minX = 1.6;
-  const maxX = viewport.width / 2 - 1.4;
+  const minX = 0.8;
+  const maxX = viewport.width / 2 - 0.6;
   const maxY = 3.2;
   const minY = -viewport.height / 2 + 1.8;
 
@@ -285,7 +285,7 @@ function Band({
             {children && (
               <Html transform distanceFactor={1.2} position={[0.11, 0.48, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
-                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', transform: 'scale(1.0)', transformOrigin: 'top center' }}
+                  style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', display: 'inline-block' }}
                   onPointerDown={handlePointerDown}
                   onPointerMove={handlePointerMove}
                   onPointerUp={handlePointerUp}
