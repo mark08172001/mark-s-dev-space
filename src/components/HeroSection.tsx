@@ -83,37 +83,37 @@ const HeroSection = () => {
                 glowColor="210 90 70"
                 colors={['#38bdf8', '#818cf8', '#c084fc']}
                 backgroundColor="hsl(var(--card) / 0.7)"
-                className="w-[340px] md:w-[400px] h-[480px] md:h-[540px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
+                className="w-[220px] md:w-[260px] h-[300px] md:h-[340px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
               >
                 {/* Badge top status bar */}
-                <div className="flex items-center justify-between px-4 py-2 border-b border-border/80 bg-muted/40 z-10 shrink-0">
-                  <div className="flex items-center gap-2">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-mono text-xs text-foreground font-semibold">Mark_TJ.badge</span>
+                <div className="flex items-center justify-between px-2.5 py-1 border-b border-border/80 bg-muted/40 z-10 shrink-0">
+                  <div className="flex items-center gap-1.5">
+                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-mono text-[9px] text-foreground font-semibold">Mark_TJ.badge</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-2 py-0.5 rounded border border-primary/20">
-                    <Sparkles className="w-2.5 h-2.5" /> 3D Physics
+                  <span className="inline-flex items-center gap-1 font-mono text-[8px] text-primary bg-primary/10 px-1 py-0.5 rounded border border-primary/20">
+                    <Sparkles className="w-1.5 h-1.5" /> 3D Physics
                   </span>
                 </div>
 
                 {/* Profile Image */}
-                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-3 p-5">
+                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-1.5 p-3">
                   <img
                     src={profilePhoto}
                     alt="Mark TJ T. Permison"
-                    className="w-40 h-40 md:w-44 md:h-44 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
+                    className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
                     style={{ pointerEvents: 'none' }}
                   />
                   <div className="text-center">
-                    <p className="font-mono text-sm text-foreground font-semibold">Mark TJ T. Permison</p>
-                    <p className="font-mono text-[11px] text-primary mt-0.5">
+                    <p className="font-mono text-xs text-foreground font-semibold">Mark TJ T. Permison</p>
+                    <p className="font-mono text-[10px] text-primary mt-0.5">
                       Full Stack Developer | QA Tester
                     </p>
                   </div>
 
                   {/* Barcode */}
-                  <div className="w-full px-4 mt-1">
-                    <div className="flex items-end justify-center gap-[2px] h-10 bg-white rounded-sm px-3 py-1.5">
+                  <div className="w-full px-2 mt-1">
+                    <div className="flex items-end justify-center gap-[2px] h-7 bg-white rounded-sm px-2 py-1">
                       {barcodeBars.map((w, i) => (
                         <span
                           key={i}
@@ -122,15 +122,15 @@ const HeroSection = () => {
                         />
                       ))}
                     </div>
-                    <p className="font-mono text-[10px] tracking-[0.3em] text-muted-foreground text-center mt-1">
+                    <p className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground text-center mt-1">
                       MTJP-2026-0917
                     </p>
                   </div>
                 </div>
 
                 {/* Badge bottom hint */}
-                <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
-                  <span className="font-mono text-[11px] text-muted-foreground">
+                <div className="py-1.5 px-2 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                  <span className="font-mono text-[10px] text-muted-foreground">
                     ✦ Drag &amp; swing 3D ID badge
                   </span>
                 </div>
@@ -140,7 +140,7 @@ const HeroSection = () => {
         </LanyardErrorBoundary>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-30">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content - Code editor style */}
@@ -206,7 +206,7 @@ const HeroSection = () => {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.9 }}
-                className="flex flex-col sm:flex-row gap-3 mt-6"
+                className="flex flex-col sm:flex-row gap-3 mt-6 relative z-[110] pointer-events-auto"
               >
                 <motion.a
                   href="#projects"
