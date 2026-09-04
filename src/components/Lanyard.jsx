@@ -241,6 +241,11 @@ function Band({
       card.current?.setNextKinematicTranslation({ x: nx, y: ny, z: vec.z - dragged.z });
     }
     if (fixed.current) {
+      if (!window.__strapLogged && state.clock.elapsedTime > 3) {
+        window.__strapLogged = true;
+        const t = (r) => { const v = r.current.translation(); return [v.x.toFixed(2), v.y.toFixed(2), v.z.toFixed(2)].join(','); };
+        console.log('STRAP fixed=' + t(fixed) + ' j1=' + t(j1) + ' j2=' + t(j2) + ' j3=' + t(j3) + ' card=' + t(card));
+      }
       [j1, j2].forEach(ref => {
         if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
         const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
