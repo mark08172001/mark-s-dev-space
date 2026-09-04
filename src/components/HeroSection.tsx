@@ -76,6 +76,11 @@ const HeroSection = () => {
               position={[0, 0, 20]}
               gravity={[0, -40, 0]}
             >
+            <div className="flex flex-col items-center">
+              {/* Strap connector tab — visually ties the badge to the lanyard rope */}
+              <div className="w-14 h-9 rounded-t-xl border border-border/80 shadow-md relative flex items-start justify-center" style={{ background: 'linear-gradient(180deg, hsl(var(--muted)) 0%, hsl(var(--card)) 100%)' }}>
+                <div className="w-7 h-2.5 mt-1.5 rounded-full bg-background border border-border/80 shadow-inner" />
+              </div>
               <BorderGlow
                 borderRadius={18}
                 glowRadius={35}
@@ -83,37 +88,37 @@ const HeroSection = () => {
                 glowColor="210 90 70"
                 colors={['#38bdf8', '#818cf8', '#c084fc']}
                 backgroundColor="hsl(var(--card) / 0.7)"
-                className="w-[220px] md:w-[260px] h-[300px] md:h-[340px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto"
+                className="w-[280px] md:w-[320px] h-[380px] md:h-[420px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto -mt-px"
               >
                 {/* Badge top status bar */}
                 <div className="flex items-center justify-between px-2.5 py-1 border-b border-border/80 bg-muted/40 z-10 shrink-0">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse" />
-                    <span className="font-mono text-[9px] text-foreground font-semibold">Mark_TJ.badge</span>
+                    <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
+                    <span className="font-mono text-[11px] text-foreground font-semibold">Mark_TJ.badge</span>
                   </div>
-                  <span className="inline-flex items-center gap-1 font-mono text-[8px] text-primary bg-primary/10 px-1 py-0.5 rounded border border-primary/20">
-                    <Sparkles className="w-1.5 h-1.5" /> 3D Physics
+                  <span className="inline-flex items-center gap-1 font-mono text-[10px] text-primary bg-primary/10 px-1.5 py-0.5 rounded border border-primary/20">
+                    <Sparkles className="w-2.5 h-2.5" /> 3D Physics
                   </span>
                 </div>
 
                 {/* Profile Image */}
-                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-1.5 p-3">
+                <div className="flex-1 w-full relative flex flex-col items-center justify-center gap-2 p-4">
                   <img
                     src={profilePhoto}
                     alt="Mark TJ T. Permison"
-                    className="w-24 h-24 md:w-28 md:h-28 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
+                    className="w-32 h-32 md:w-36 md:h-36 rounded-2xl object-cover border-2 border-primary/30 shadow-xl"
                     style={{ pointerEvents: 'none' }}
                   />
                   <div className="text-center">
-                    <p className="font-mono text-xs text-foreground font-semibold">Mark TJ T. Permison</p>
-                    <p className="font-mono text-[10px] text-primary mt-0.5">
+                    <p className="font-mono text-sm text-foreground font-semibold">Mark TJ T. Permison</p>
+                    <p className="font-mono text-xs text-primary mt-0.5">
                       Full Stack Developer | QA Tester
                     </p>
                   </div>
 
                   {/* Barcode */}
-                  <div className="w-full px-2 mt-1">
-                    <div className="flex items-end justify-center gap-[2px] h-7 bg-white rounded-sm px-2 py-1">
+                  <div className="w-full px-3 mt-1">
+                    <div className="flex items-end justify-center gap-[2px] h-9 bg-white rounded-sm px-3 py-1.5">
                       {barcodeBars.map((w, i) => (
                         <span
                           key={i}
@@ -122,19 +127,20 @@ const HeroSection = () => {
                         />
                       ))}
                     </div>
-                    <p className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground text-center mt-1">
+                    <p className="font-mono text-[10px] tracking-[0.2em] text-muted-foreground text-center mt-1">
                       MTJP-2026-0917
                     </p>
                   </div>
                 </div>
 
                 {/* Badge bottom hint */}
-                <div className="py-1.5 px-2 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
-                  <span className="font-mono text-[10px] text-muted-foreground">
+                <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                  <span className="font-mono text-[11px] text-muted-foreground">
                     ✦ Drag &amp; swing 3D ID badge
                   </span>
                 </div>
               </BorderGlow>
+            </div>
             </Lanyard>
           </Suspense>
         </LanyardErrorBoundary>
