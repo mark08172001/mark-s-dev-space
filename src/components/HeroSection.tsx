@@ -140,7 +140,7 @@ const HeroSection = () => {
         </LanyardErrorBoundary>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-10">
+      <div className="container mx-auto px-4 md:px-6 relative z-30">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content - Code editor style */}
