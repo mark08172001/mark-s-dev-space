@@ -105,15 +105,15 @@ const HeroSection = () => {
                     style={{ pointerEvents: 'none' }}
                   />
                   <div className="text-center">
-                    <p className="font-mono text-sm text-foreground font-semibold">Mark TJ T. Permison</p>
-                    <p className="font-mono text-[11px] text-primary mt-0.5">
+                    <p className="font-mono text-xs text-foreground font-semibold">Mark TJ T. Permison</p>
+                    <p className="font-mono text-[10px] text-primary mt-0.5">
                       Full Stack Developer | QA Tester
                     </p>
                   </div>
 
                   {/* Barcode */}
                   <div className="w-full px-2 mt-1">
-                    <div className="flex items-end justify-center gap-[2px] h-8 bg-white rounded-sm px-2 py-1">
+                    <div className="flex items-end justify-center gap-[2px] h-7 bg-white rounded-sm px-2 py-1">
                       {barcodeBars.map((w, i) => (
                         <span
                           key={i}
@@ -122,15 +122,15 @@ const HeroSection = () => {
                         />
                       ))}
                     </div>
-                    <p className="font-mono text-[9px] tracking-[0.25em] text-muted-foreground text-center mt-1">
+                    <p className="font-mono text-[8px] tracking-[0.2em] text-muted-foreground text-center mt-1">
                       MTJP-2026-0917
                     </p>
                   </div>
                 </div>
 
                 {/* Badge bottom hint */}
-                <div className="py-2 px-3 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
-                  <span className="font-mono text-[11px] text-muted-foreground">
+                <div className="py-1.5 px-2 text-center border-t border-border/60 bg-muted/30 z-10 shrink-0">
+                  <span className="font-mono text-[10px] text-muted-foreground">
                     ✦ Drag &amp; swing 3D ID badge
                   </span>
                 </div>
