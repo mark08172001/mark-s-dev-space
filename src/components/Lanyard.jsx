@@ -253,7 +253,9 @@ function Band({
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
-      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      const oldGeo = band.current.geometry;
+      band.current.geometry = new THREE.TubeGeometry(curve, 32, 0.045, 8, false);
+      oldGeo?.dispose?.();
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
@@ -283,7 +285,7 @@ function Band({
             position={[0, -1.2, -0.05]}
           >
             {children && (
-              <Html transform distanceFactor={1.2} position={[-0.222, 0.58, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
+              <Html transform distanceFactor={1.2} position={[0, 0.58, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
                 <div
                   style={{ cursor: dragged ? 'grabbing' : 'grab', touchAction: 'none', pointerEvents: 'auto', display: 'inline-block' }}
                   onPointerDown={handlePointerDown}
@@ -311,13 +313,7 @@ function Band({
         </RigidBody>
       </AnchoredGroup>
       <mesh ref={band} frustumCulled={false}>
-        <meshLineGeometry />
-        <meshLineMaterial
-          color="#e2e8f0"
-          depthTest={false}
-          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          lineWidth={Math.max(0.35, lanyardWidth)}
-        />
+        <meshBasicMaterial color="#cbd5e1" depthTest={false} />
       </mesh>
     </>
   );
