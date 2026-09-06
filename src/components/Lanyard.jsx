@@ -177,6 +177,7 @@ function Band({
     () =>
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
+  const [emptyGeo] = useState(() => new THREE.BufferGeometry());
   const [dragged, drag] = useState(false);
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
