@@ -87,7 +87,7 @@ const HeroSection = () => {
                 glowIntensity={1.0}
                 glowColor="210 90 70"
                 colors={['#38bdf8', '#818cf8', '#c084fc']}
-                backgroundColor="hsl(var(--card) / 0.7)"
+                backgroundColor="hsl(var(--card) / 0.95)"
                 className="w-[280px] md:w-[320px] h-[380px] md:h-[420px] shadow-2xl backdrop-blur-md relative overflow-hidden flex flex-col mx-auto -mt-px"
               >
                 {/* Badge top status bar */}
