@@ -23,7 +23,7 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 const AnchoredGroup = ({ children }) => {
   const viewport = useThree((s) => s.viewport);
   const x = Math.max(0.4, viewport.width / 2 - 1.4);
-  return <group position={[x, 6, 0]}>{children}</group>;
+  return <group position={[x, 5.2, 0]}>{children}</group>;
 };
 
 export default function Lanyard({
@@ -241,11 +241,6 @@ function Band({
       card.current?.setNextKinematicTranslation({ x: nx, y: ny, z: vec.z - dragged.z });
     }
     if (fixed.current) {
-      if (!window.__strapLogged && state.clock.elapsedTime > 3) {
-        window.__strapLogged = true;
-        const t = (r) => { const v = r.current.translation(); return [v.x.toFixed(2), v.y.toFixed(2), v.z.toFixed(2)].join(','); };
-        console.log('STRAP fixed=' + t(fixed) + ' j1=' + t(j1) + ' j2=' + t(j2) + ' j3=' + t(j3) + ' card=' + t(card));
-      }
       [j1, j2].forEach(ref => {
         if (!ref.current.lerped) ref.current.lerped = new THREE.Vector3().copy(ref.current.translation());
         const clampedDistance = Math.max(0.1, Math.min(1, ref.current.lerped.distanceTo(ref.current.translation())));
@@ -321,7 +316,7 @@ function Band({
           color="#e2e8f0"
           depthTest={false}
           resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          lineWidth={Math.max(2.5, lanyardWidth)}
+          lineWidth={Math.max(1.0, lanyardWidth)}
         />
       </mesh>
     </>
