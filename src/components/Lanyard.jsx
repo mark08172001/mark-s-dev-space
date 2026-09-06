@@ -177,6 +177,7 @@ function Band({
     () =>
       new THREE.CatmullRomCurve3([new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3(), new THREE.Vector3()])
   );
+  const [emptyGeo] = useState(() => new THREE.BufferGeometry());
   const [dragged, drag] = useState(false);
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
@@ -253,7 +254,9 @@ function Band({
       curve.points[1].copy(j2.current.lerped);
       curve.points[2].copy(j1.current.lerped);
       curve.points[3].copy(fixed.current.translation());
-      band.current.geometry.setPoints(curve.getPoints(isMobile ? 16 : 32));
+      const oldGeo = band.current.geometry;
+      band.current.geometry = new THREE.TubeGeometry(curve, 32, 0.045, 8, false);
+      oldGeo?.dispose?.();
       ang.copy(card.current.angvel());
       rot.copy(card.current.rotation());
       card.current.setAngvel({ x: ang.x, y: ang.y - rot.y * 0.25, z: ang.z });
@@ -310,14 +313,8 @@ function Band({
           </group>
         </RigidBody>
       </AnchoredGroup>
-      <mesh ref={band} frustumCulled={false}>
-        <meshLineGeometry />
-        <meshLineMaterial
-          color="#e2e8f0"
-          depthTest={false}
-          resolution={isMobile ? [1000, 2000] : [1000, 1000]}
-          lineWidth={Math.max(0.35, lanyardWidth)}
-        />
+      <mesh ref={band} frustumCulled={false} geometry={emptyGeo}>
+        <meshBasicMaterial color="#cbd5e1" depthTest={false} />
       </mesh>
     </>
   );
