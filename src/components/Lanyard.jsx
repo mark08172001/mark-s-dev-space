@@ -313,7 +313,7 @@ function Band({
           </group>
         </RigidBody>
       </AnchoredGroup>
-      <mesh ref={band} frustumCulled={false}>
+      <mesh ref={band} frustumCulled={false} geometry={emptyGeo}>
         <meshBasicMaterial color="#cbd5e1" depthTest={false} />
       </mesh>
     </>
