@@ -195,12 +195,14 @@ function Band({
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
   const gl = useThree((s) => s.gl);
-  const viewport = useThree((s) => s.viewport);
-  // Keep the badge on the right side of the page — never let it cross the middle
-  const minX = 0.3;
-  const maxX = Math.max(minX + 0.1, viewport.width / 2 - 1.2);
-  const maxY = 3.2;
-  const minY = -viewport.height / 2 + 1.8;
+  const { viewport, narrow, scale: badgeScale } = useResponsive();
+  // Keep the badge inside the viewport. On wide screens it stays on the right
+  // half of the page; on narrow screens it can roam the full width.
+  const halfBadge = 0.9 * (badgeScale / 2.25);
+  const minX = narrow ? -viewport.width / 2 + halfBadge : 0.3;
+  const maxX = Math.max(minX + 0.1, viewport.width / 2 - halfBadge);
+  const maxY = Math.min(3.2, viewport.height / 2 - 0.5);
+  const minY = -viewport.height / 2 + 1.4 * (badgeScale / 2.25);
 
   const updateMouse = (e) => {
     const rect = gl.domElement.getBoundingClientRect();
