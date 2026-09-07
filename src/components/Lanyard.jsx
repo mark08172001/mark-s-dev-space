@@ -256,7 +256,7 @@ function Band({
       const cardQuaternion = card.current.rotation();
       cardRotation.set(cardQuaternion.x, cardQuaternion.y, cardQuaternion.z, cardQuaternion.w);
       attachment
-        .set(0, 1.5, 0)
+        .set(0, children ? 0.1 : 1.5, children ? 0.06 : 0)
         .applyQuaternion(cardRotation)
         .add(cardPosition);
       curve.points[0].copy(attachment);
