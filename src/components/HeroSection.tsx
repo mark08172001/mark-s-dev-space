@@ -69,7 +69,7 @@ const HeroSection = () => {
       </div>
 
       {/* 3D Interactive Lanyard Profile Badge - overlays the whole hero on desktop so the badge can roam the right side; scrolls away with the hero */}
-      <div className="z-20 max-lg:relative max-lg:h-[420px] max-lg:w-full lg:absolute lg:inset-0 lg:pointer-events-none">
+      <div className="z-20 max-lg:relative max-lg:h-[340px] sm:max-lg:h-[420px] max-lg:w-full lg:absolute lg:inset-0 lg:pointer-events-none">
         <LanyardErrorBoundary fallback={null}>
           <Suspense fallback={null}>
             <Lanyard

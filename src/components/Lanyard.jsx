@@ -302,10 +302,10 @@ function Band({
           <BallCollider args={[0.1]} />
         </RigidBody>
         <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <CuboidCollider args={[0.8 * (badgeScale / 2.25), 1.125 * (badgeScale / 2.25), 0.01]} />
           <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
+            scale={badgeScale}
+            position={[0, -1.2 * (badgeScale / 2.25), -0.05]}
           >
             {children && (
               <Html transform distanceFactor={1.2} position={[0, 0.58, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
