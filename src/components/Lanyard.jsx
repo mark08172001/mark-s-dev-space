@@ -24,12 +24,15 @@ const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 // lanyard + badge adapt to any screen width/height.
 const useResponsive = () => {
   const viewport = useThree((s) => s.viewport);
-  const narrow = viewport.width < 8; // phones / small tablets
-  // Badge scale shrinks on small screens, capped on large ones
-  const scale = Math.min(2.25, Math.max(1.15, viewport.width / 5.2));
+  const size = useThree((s) => s.size);
+  const narrow = size.width < 1024; // phones / tablets: badge is centered
+  // Aim for a badge that always takes a sensible share of the screen width
+  const targetPx = Math.min(240, Math.max(150, size.width * 0.45));
+  const pxPerUnit = size.width / viewport.width;
+  const scale = Math.min(3.6, Math.max(1.6, (2.25 * targetPx) / (1.6 * pxPerUnit)));
   const anchorX = narrow ? 0 : Math.max(0.6, viewport.width / 2 - 1.4);
-  const anchorY = Math.min(5.0, viewport.height / 2 + 0.6);
-  return { viewport, narrow, scale, anchorX, anchorY };
+  const anchorY = narrow ? viewport.height / 2 - 0.2 : Math.min(5.0, viewport.height / 2 + 0.6);
+  return { viewport, size, narrow, scale, anchorX, anchorY };
 };
 
 const AnchoredGroup = ({ children }) => {
