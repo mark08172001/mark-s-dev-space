@@ -44,7 +44,7 @@ class LanyardErrorBoundary extends Component<{ fallback: React.ReactNode; childr
 
 const HeroSection = () => {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden pt-20"
+    <section className="relative min-h-screen flex flex-wrap lg:flex-nowrap items-center justify-center overflow-hidden pt-20"
       style={{ background: 'var(--gradient-hero)' }}
     >
       {/* Code rain background effect */}
@@ -69,7 +69,7 @@ const HeroSection = () => {
       </div>
 
       {/* 3D Interactive Lanyard Profile Badge - overlays the whole hero on desktop so the badge can roam the right side; scrolls away with the hero */}
-      <div className="z-20 max-lg:relative max-lg:h-[420px] max-lg:w-full lg:absolute lg:inset-0 lg:pointer-events-none">
+      <div className="z-20 max-lg:relative max-lg:h-[600px] sm:max-lg:h-[680px] max-lg:w-full max-lg:basis-full max-lg:shrink-0 lg:absolute lg:inset-0 lg:pointer-events-none">
         <LanyardErrorBoundary fallback={null}>
           <Suspense fallback={null}>
             <Lanyard
@@ -146,7 +146,7 @@ const HeroSection = () => {
         </LanyardErrorBoundary>
       </div>
 
-      <div className="container mx-auto px-4 md:px-6 relative z-30">
+      <div className="container mx-auto px-4 md:px-6 relative z-30 max-lg:basis-full">
         <div className="max-w-6xl mx-auto">
           <div className="grid lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             {/* Content - Code editor style */}

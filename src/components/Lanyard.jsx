@@ -20,10 +20,24 @@ const BLANK_PIXEL =
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
-const AnchoredGroup = ({ children }) => {
+// Responsive helpers: everything is derived from the 3D viewport size so the
+// lanyard + badge adapt to any screen width/height.
+const useResponsive = () => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(0.6, viewport.width / 2 - 1.4);
-  return <group position={[x, 5.0, 0]}>{children}</group>;
+  const size = useThree((s) => s.size);
+  const narrow = size.width < 1024; // phones / tablets: badge is centered
+  // Aim for a badge that always takes a sensible share of the screen width
+  const targetPx = Math.min(240, Math.max(150, size.width * 0.45));
+  const pxPerUnit = size.width / viewport.width;
+  const scale = Math.min(narrow ? 2.9 : 3.6, Math.max(1.6, (2.25 * targetPx) / (1.6 * pxPerUnit)));
+  const anchorX = narrow ? 0 : Math.max(0.6, viewport.width / 2 - 1.4);
+  const anchorY = narrow ? viewport.height / 2 - 0.2 : Math.min(5.0, viewport.height / 2 + 0.6);
+  return { viewport, size, narrow, scale, anchorX, anchorY };
+};
+
+const AnchoredGroup = ({ children }) => {
+  const { anchorX, anchorY } = useResponsive();
+  return <group position={[anchorX, anchorY, 0]}>{children}</group>;
 };
 
 export default function Lanyard({
@@ -184,12 +198,14 @@ function Band({
   const mouseRef = useRef(new THREE.Vector2());
   const camera = useThree((s) => s.camera);
   const gl = useThree((s) => s.gl);
-  const viewport = useThree((s) => s.viewport);
-  // Keep the badge on the right side of the page — never let it cross the middle
-  const minX = 0.3;
-  const maxX = Math.max(minX + 0.1, viewport.width / 2 - 1.2);
-  const maxY = 3.2;
-  const minY = -viewport.height / 2 + 1.8;
+  const { viewport, narrow, scale: badgeScale } = useResponsive();
+  // Keep the badge inside the viewport. On wide screens it stays on the right
+  // half of the page; on narrow screens it can roam the full width.
+  const halfBadge = 0.9 * (badgeScale / 2.25);
+  const minX = narrow ? -viewport.width / 2 + halfBadge : 0.3;
+  const maxX = Math.max(minX + 0.1, viewport.width / 2 - halfBadge);
+  const maxY = Math.min(3.2, viewport.height / 2 - 0.5);
+  const minY = -viewport.height / 2 + 1.4 * (badgeScale / 2.25);
 
   const updateMouse = (e) => {
     const rect = gl.domElement.getBoundingClientRect();
@@ -289,10 +305,10 @@ function Band({
           <BallCollider args={[0.1]} />
         </RigidBody>
         <RigidBody position={[2, 0, 0]} ref={card} {...segmentProps} type={dragged ? 'kinematicPosition' : 'dynamic'}>
-          <CuboidCollider args={[0.8, 1.125, 0.01]} />
+          <CuboidCollider args={[0.8 * (badgeScale / 2.25), 1.125 * (badgeScale / 2.25), 0.01]} />
           <group
-            scale={2.25}
-            position={[0, -1.2, -0.05]}
+            scale={badgeScale}
+            position={[0, -1.2 * (badgeScale / 2.25), -0.05]}
           >
             {children && (
               <Html transform distanceFactor={1.2} position={[0, 0.58, 0.05]} zIndexRange={[100, 0]} style={{ pointerEvents: 'auto' }}>
