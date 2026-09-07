@@ -29,7 +29,7 @@ const useResponsive = () => {
   // Aim for a badge that always takes a sensible share of the screen width
   const targetPx = Math.min(240, Math.max(150, size.width * 0.45));
   const pxPerUnit = size.width / viewport.width;
-  const scale = Math.min(3.6, Math.max(1.6, (2.25 * targetPx) / (1.6 * pxPerUnit)));
+  const scale = Math.min(narrow ? 2.9 : 3.6, Math.max(1.6, (2.25 * targetPx) / (1.6 * pxPerUnit)));
   const anchorX = narrow ? 0 : Math.max(0.6, viewport.width / 2 - 1.4);
   const anchorY = narrow ? viewport.height / 2 - 0.2 : Math.min(5.0, viewport.height / 2 + 0.6);
   return { viewport, size, narrow, scale, anchorX, anchorY };
