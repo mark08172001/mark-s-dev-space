@@ -20,10 +20,21 @@ const BLANK_PIXEL =
 const FRONT_UV_RECT = { x: 0, y: 0, w: 0.5, h: 0.755 };
 const BACK_UV_RECT = { x: 0.5, y: 0, w: 0.5, h: 0.757 };
 
-const AnchoredGroup = ({ children }) => {
+// Responsive helpers: everything is derived from the 3D viewport size so the
+// lanyard + badge adapt to any screen width/height.
+const useResponsive = () => {
   const viewport = useThree((s) => s.viewport);
-  const x = Math.max(0.6, viewport.width / 2 - 1.4);
-  return <group position={[x, 5.0, 0]}>{children}</group>;
+  const narrow = viewport.width < 8; // phones / small tablets
+  // Badge scale shrinks on small screens, capped on large ones
+  const scale = Math.min(2.25, Math.max(1.15, viewport.width / 5.2));
+  const anchorX = narrow ? 0 : Math.max(0.6, viewport.width / 2 - 1.4);
+  const anchorY = Math.min(5.0, viewport.height / 2 + 0.6);
+  return { viewport, narrow, scale, anchorX, anchorY };
+};
+
+const AnchoredGroup = ({ children }) => {
+  const { anchorX, anchorY } = useResponsive();
+  return <group position={[anchorX, anchorY, 0]}>{children}</group>;
 };
 
 export default function Lanyard({
